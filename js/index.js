@@ -68,7 +68,7 @@ function upload() {
 		console.log("error with AJAX PDF upload");
 		console.dir(xhr);
 	}).success(function(response) {
-		console.log(response);
+//		console.log(response);
 		$('#adstext').val(response);
 		process();
 	});
@@ -101,8 +101,9 @@ function process() {
 		$('#progressbar').progressbar("value", pb_val+PROGRESSBAR_ADVANCE+PROGRESSBAR_ADVANCE);
 	}
 	else {
+		console.log(subtext);
 		$.ajax({
-			url: "/api/pubmed.php",
+			url: "php/pubmed.php",
 			data: {
 				ay: $('#acyr').val(),
 				pmidblock: subtext
