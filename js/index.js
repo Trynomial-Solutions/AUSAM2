@@ -91,12 +91,12 @@ function process() {
 	var fac_start=text.indexOf(FAC_SA_START);
 	if (fac_start===-1) {fac_start=text.indexOF(FAC_SA_START.toUpperCase());}
 	var fac_end=text.indexOf(FAC_SA_END);
-	if (fac_end===-1) {fac_end=text.indexOF(FAC_SA_END.toUpperCase());}
+	if (fac_end===-1) {fac_end=text.indexOf(FAC_SA_END.toUpperCase());}
 	var res_start=text.indexOf(RES_SA_START);
-	if (res_start===-1) {res_start=text.indexOF(RES_SA_START.toUpperCase());}
+	if (res_start===-1) {res_start=text.indexOf(RES_SA_START.toUpperCase());}
 	var res_end=text.indexOf(RES_SA_END);
-	if (res_end===-1) {res_end=text.indexOF(RES_SA_END.toUpperCase());}
-	var subtext=text.substring(fac_start, fac_end)+text.substring(res_start, res_end);
+	if (res_end===-1) {res_end=text.indexOf(RES_SA_END.toUpperCase());}
+	var subtext=text.substring(fac_start, fac_end);
 	if (subtext.length<10) {
 		// no scholarly activity block present
 		$('#pmid_table').append('<tr><td colspan="4">'+NOT_FOUND_HTML+'</td></tr>');
@@ -105,7 +105,6 @@ function process() {
 		$('#progressbar').progressbar("value", pb_val+PROGRESSBAR_ADVANCE+PROGRESSBAR_ADVANCE);
 	}
 	else {
-//		console.log(subtext);
 		$.ajax({
 			url: "php/pubmed.php",
 			data: {
@@ -160,8 +159,11 @@ function process() {
 	
 	// Board certification data
 	var board_start=text.indexOf(BOARD_DATA_START);
+	if (board_start===-1) {board_start=text.indexOf(BOARD_DATA_START.toUpperCase());}
 	var board_end=text.indexOf(BOARD_DATA_END);
+	if (board_end===-1) {board_end=text.indexOf(BOARD_DATA_END.toUpperCase()); }
 	subtext=text.substring(board_start, board_end);
+	console.log(subtext);
 	if (subtext.length<10) {
 		// no board cert data present
 		$('#board_table').append("<tr><td colspan='3'>"+NOT_FOUND_HTML+"</td></tr>");
@@ -170,7 +172,6 @@ function process() {
 		$('#progressbar').progressbar("value", pb_val+PROGRESSBAR_ADVANCE+PROGRESSBAR_ADVANCE);
 	}
 	else {
-//		console.log(subtext);
 		$.ajax({
 			url: "php/boardcert_check.php",
 			data: {boardblock: subtext},

@@ -89,7 +89,7 @@ if (isset($_POST['pmidblock'])) $pmidblock=$_POST['pmidblock']; else err(4, "pmi
 if (strlen($pmidblock)<8) err(4, "invalid PMID block");
 
 $matches=array();
-$count=preg_match_all("/\d{8}/", $pmidblock, $matches);
+$count=preg_match_all("/\b\d{8}\b/", $pmidblock, $matches);
 if ($count===false) err (2, "preg_match_all error");
 if ($count===0) err (3, "No PMIDs found");
 $rVal['pmid_count']=$count;
