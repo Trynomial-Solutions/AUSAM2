@@ -158,6 +158,7 @@ foreach ($data['uids'] as $uid) {
 	$rVal['pmid_dated']++;
 }
 
+/*
 // write statistics
 require_once("../inc/web_connecti.inc.php");
 $sql="INSERT INTO ausam_stats (pmid_count, pmid_dated, pmid_oor, pmid_invalid) VALUES (?, ?, ?, ?)";
@@ -165,6 +166,7 @@ $stmt=$web_dbi->prepare($sql);
 $stmt->bind_param("iiii", $rVal['pmid_count'], $rVal['pmid_dated'], $pmid_oor, $pmid_invalid);
 $stmt->execute();
 $stmt->close();
+*/
 
 header('Content-Type: application/json');
 echo json_encode($rVal);

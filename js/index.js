@@ -101,7 +101,7 @@ function process() {
 		$('#progressbar').progressbar("value", pb_val+PROGRESSBAR_ADVANCE+PROGRESSBAR_ADVANCE);
 	}
 	else {
-		console.log(subtext);
+//		console.log(subtext);
 		$.ajax({
 			url: "php/pubmed.php",
 			data: {
@@ -111,15 +111,14 @@ function process() {
 			dataType: "json",
 			method: "POST",
 			success: function(rval){
+				console.log(rval);
 				pb_val=$('#progressbar').progressbar("value");
 				$('#progressbar').progressbar("value", pb_val+PROGRESSBAR_ADVANCE);
 				console.log(JSON.stringify(rval, null, 4));
 				pmid_processed(rval);
 			},
-			error: function( xhr, status, errorThrown ) {
-				modal_dialog( "AJAX error", "Unexpected result. Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a>" );
-				console.log( "Error: " + errorThrown );
-				console.log( "Status: " + status );
+			error: function( xhr) {
+				modal_dialog( "AJAX error PubMed", "Unexpected result. Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a>" );
 				console.dir( xhr );
 			}
 		});
