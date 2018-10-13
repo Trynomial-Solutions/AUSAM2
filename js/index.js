@@ -83,7 +83,7 @@ function process() {
 	}
 	else {
 		$.ajax({
-			url: "/api/pubmed.php",
+			url: "php/pubmed.php",
 			data: {
 				ay: $('#acyr').val(),
 				pmidblock: subtext
