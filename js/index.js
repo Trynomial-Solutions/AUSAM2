@@ -70,9 +70,13 @@ function process() {
 
 	// process PMIDs
 	var fac_start=text.indexOf(FAC_SA_START);
+	if (fac_start===-1) {fac_start=text.indexOf(FAC_SA_START.toUpperCase());}
 	var fac_end=text.indexOf(FAC_SA_END);
+	if (fac_end===-1) {fac_end=text.indexOf(FAC_SA_END.toUpperCase());}
 	var res_start=text.indexOf(RES_SA_START);
+	if (res_start===-1) {res_start=text.indexOf(RES_SA_START.toUpperCase());}
 	var res_end=text.indexOf(RES_SA_END);
+	if (res_end===-1) {res_end=text.indexOf(RES_SA_END.toUpperCase());}
 	var subtext=text.substring(fac_start, fac_end)+text.substring(res_start, res_end);
 	if (subtext.length<10) {
 		// no scholarly activity block present
@@ -108,7 +112,9 @@ function process() {
 	
 	// Licensure data
 	var lic_start=text.indexOf(LIC_START);
+	if (lic_start===-1) {lic_start=text.indexOf(LIC_START.toUpperCase());}
 	var lic_end=text.indexOf(LIC_END);
+	if (lic_end===-1) {lic_end=text.indexOf(LIC_END.toUpperCase());}
 	subtext=text.substring(lic_start, lic_end);
 	if (subtext.length<10) {
 		// no license block present
@@ -140,7 +146,9 @@ function process() {
 	
 	// Board certification data
 	var board_start=text.indexOf(BOARD_DATA_START);
+	if (board_start===-1) {board_start=text.indexOf(BOARD_DATA_START.toUpperCase());}
 	var board_end=text.indexOf(BOARD_DATA_END);
+	if (board_end===-1) {board_end=text.indexOf(BOARD_DATA_END.toUpperCase());}
 	subtext=text.substring(board_start, board_end);
 	if (subtext.length<10) {
 		// no board cert data present
