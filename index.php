@@ -26,12 +26,10 @@
 <div id="content">
     <div id="form_div">
         <form id="adsform" name="adsform" method="post">
-			<p><label for='adsfile'>Please upload PDF file:</label>
+			<label for='adsfile'>Please upload PDF file:</label>
 				<input type="file" name='adsfile' id='adsfile'>
 				<input type="hidden" name='adstext' id='adstext'>
-            </p>
-            <div id="progressbar"><div class="progress-label">Loading...</div></div>
-            <p><label for="acyr">Applicable academic year:</label>
+            <label for="acyr">Applicable academic year:</label>
             <select name="acyr" id="acyr" data-mini="true" data-native-menu="false">
 <?php 
 date_default_timezone_set("America/Detroit");
@@ -42,9 +40,10 @@ for ($i=date('Y')-2; $i<date('Y')+1; $i++) {
 }
 ?>
             </select>
-              <p>&nbsp;</p>
             <input type="button" name="doit" id="doit" value="Check Data">
 		    <input type="reset" name="clear" id="clear" value="Reset">
+            <div id="progressbar"><div class="progress-label">Loading...</div></div>
+              <p>&nbsp;</p>
         </form>
     </div>
     <div id="results">

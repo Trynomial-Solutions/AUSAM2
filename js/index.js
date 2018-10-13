@@ -111,7 +111,6 @@ function process() {
 			dataType: "json",
 			method: "POST",
 			success: function(rval){
-				console.log(rval);
 				pb_val=$('#progressbar').progressbar("value");
 				$('#progressbar').progressbar("value", pb_val+PROGRESSBAR_ADVANCE);
 				console.log(JSON.stringify(rval, null, 4));
@@ -146,10 +145,8 @@ function process() {
 				console.log(JSON.stringify(rval, null, 4));
 				lic_processed(rval);
 			},
-			error: function( xhr, status, errorThrown ) {
-				modal_dialog( "AJAX error", "Unexpected result. Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a>" );
-				console.log( "Error: " + errorThrown );
-				console.log( "Status: " + status );
+			error: function( xhr) {
+				modal_dialog( "AJAX error License", "Unexpected result. Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a>" );
 				console.dir( xhr );
 			}
 		});
@@ -167,6 +164,7 @@ function process() {
 		$('#progressbar').progressbar("value", pb_val+PROGRESSBAR_ADVANCE+PROGRESSBAR_ADVANCE);
 	}
 	else {
+		console.log(subtext);
 		$.ajax({
 			url: "php/boardcert_check.php",
 			data: {boardblock: subtext},
@@ -178,10 +176,8 @@ function process() {
 				console.log(JSON.stringify(rval, null, 4));
 				board_processed(rval);
 			},
-			error: function( xhr, status, errorThrown ) {
-				modal_dialog( "AJAX error", "Unexpected result. Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a>" );
-				console.log( "Error: " + errorThrown );
-				console.log( "Status: " + status );
+			error: function( xhr) {
+				modal_dialog( "AJAX error Boardcert", "Unexpected result. Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a>" );
 				console.dir( xhr );
 			}
 		});
