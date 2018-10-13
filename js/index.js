@@ -93,7 +93,8 @@ function process() {
 			success: function(rval){
 				pb_val=$('#progressbar').progressbar("value");
 				$('#progressbar').progressbar("value", pb_val+PROGRESSBAR_ADVANCE);
-				console.log(JSON.stringify(rval, null, 4));
+				console.log('PubMed AJAX Returned:');
+				console.dir(rval);
 				pmid_processed(rval);
 			},
 			error: function( xhr, status, errorThrown ) {
@@ -124,7 +125,8 @@ function process() {
 			success: function(rval){
 				pb_val=$('#progressbar').progressbar("value");
 				$('#progressbar').progressbar("value", pb_val+PROGRESSBAR_ADVANCE);
-				console.log(JSON.stringify(rval, null, 4));
+				console.log('License AJAX Returned:');
+				console.dir(rval);
 				lic_processed(rval);
 			},
 			error: function( xhr, status, errorThrown ) {
@@ -156,7 +158,8 @@ function process() {
 			success: function(rval){
 				pb_val=$('#progressbar').progressbar("value");
 				$('#progressbar').progressbar("value", pb_val+PROGRESSBAR_ADVANCE);
-				console.log(JSON.stringify(rval, null, 4));
+				console.log('Board Cert AJAX Returned:');
+				console.dir(rval);
 				board_processed(rval);
 			},
 			error: function( xhr, status, errorThrown ) {
