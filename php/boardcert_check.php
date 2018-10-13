@@ -57,67 +57,6 @@ $rVal=array(
 	"results" => array ()
 );
 
-$_POST['boardblock']= <<<BB
-Physician Faculty Roster
-
-List alphabetically and by site all physician faculty who have a significant role (teaching or mentoring) in the education of residents/fellows and who have documented qualifications to instruct and supervise. List the Program Director first.
-
-Core physician faculty must:
- Devote sufficient time to the educational program to fulfill their supervisory and teaching responsibilities and demonstrate a strong interest in resident education
- Administer and maintain an educational environment conducive to educating residents in each of the ACGME competency areas
- Participate in faculty development programs designed to enhance the effectiveness of their teaching and to promote scholarly activity
- Establish and maintain an environment of inquiry and scholarship with an active research component
- Regularly participate in organized clinical discussions, rounds, journal clubs, and conferences
- Encourage and support residents in pursuing scholarly activities
- Be clinically active
- Devote the majority of their professional efforts to the program
-All physicians who devote at least 15 hours per week to resident education and administration are designated as core faculty.
-
-All core physician faculty should teach and advise residents as well as participate in at least 1 of the following:
- Evaluate the competency domains
- Work closely with and support the program director
- Assist in developing and implementing evaluation systems
-Program directors will not be designated as core faculty.
-
-Continued Accreditation programs: A CV is only required for the program director.
-
-New Applications and Initial Accreditation programs: A CV is required for the program director and each active physician faculty member on your roster.
-
-
-Name	Core Faculty	Based Mainly at Inst. #	Specialties / Certifications	No. of Years Teaching in This Specialty	Average Hours Per Week Spent On
-Specialty / Certification	Cert	Original Cert Year	Cert Status	Re-cert Year	Clinical Supervision	Admin	Didactic Teaching	Research
-Nikhil Goyal, MD
-(Program Director, Transitional Year Residency Program)	N	1	Emergency medicine	ABMS	2007	R	2018	9	20	15	9	1
-Clinical informatics	ABMS	2016	O	--
-Internal medicine	ABMS	2006	M	2016
-Odaliz Abreu-Lanfranco, MD
-(Program Director, Internal Medicine Residency)	Y	1	Internal medicine	ABMS	2006	M	2016	1	10	27	6	1
-Infectious disease	ABMS	2012	N	--
-Bradley Jaskulka, MD
-(Associate Program Director, Transitional Year Residency)	Y	1	Emergency medicine	ABMS	2008	M	--	3	20	10	2	1
-Sports medicine	ABMS	2009	M	--
-Vinay Shah, MD
-(Internal Medicine Faculty, CCC & PEC Member)	Y	1	Internal medicine	ABMS	1997	M	2017	5	20	1	1	1
-Taher Vohra, MD
-(Emergency Medicine Residency Program Director)	Y	1	Emergency medicine	ABMS	2006	M	2015	4	20	1	2	1
-Certification Status:
-Certification in the primary specialty refers to Board Certification. Certification for the secondary specialty refers to sub-board certification. If the secondary specialty is a core ACGME specialty (e.g., Internal Medicine, Pediatrics, etc.), the certification question refers to Board Certification.
-
-R = Re-Certified
-O = Time Limited Certificate/Original Certification Currently Valid
-L = Certification Lapsed
-N = Time-unlimited certificate/no Re-Certification
-M = Meets MOC/CC Requirements
-C = Meets Osteopathic Continuous Certification (OCC)
-Based Mainly at Institution #:
-1 = [250331] Henry Ford Hospital
-*=Institution is an elective rotation site.
-**=Institution not on list of active participating sites.
-Educational Focus:
-† = Program and Osteopathic Faculty
-† † = Osteopathic Faculty
-BB;
-
 if ((!isset($_POST['boardblock'])) || (strlen($_POST['boardblock'])<10)) err(1, "Missing board text block");
 
 // extract all info from boardblock
