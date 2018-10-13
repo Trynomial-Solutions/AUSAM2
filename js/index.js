@@ -1,10 +1,12 @@
 // these constants define boundaries of text in the ADS. For example faculty scholarly activity is between the text listed in FAC_SA_START and FAC_SA_END
-const FAC_SA_START = "FACULTY SCHOLARLY ACTIVITY";
-const FAC_SA_END = "RESIDENT APPOINTMENTS";
-const RES_SA_START = "RESIDENT SCHOLARLY ACTIVITY";
-const RES_SA_END = "LIST OF RESIDENTS ON LEAVE";
-const BOARD_DATA_START = "PHYSICIAN FACULTY ROSTER";
-const BOARD_DATA_END = "NON-PHYSICIAN FACULTY ROSTER";
+const FAC_SA_START = "Faculty Scholarly Activity";
+const FAC_SA_END = "Resident Appointments";
+const RES_SA_START = "Resident Scholarly Activity";
+const RES_SA_END = "List Of Residents On Leave";
+const BOARD_DATA_START = "Physician Faculty Roster";
+const BOARD_DATA_END = "Non-Physician Faculty Roster";
+const LIC_START = 'Current Licensure Data';
+const LIC_END = 'Academic Appointments';
 
 // each time an action completes, progressbar advances by... (6 events adding up to 100%)
 const PROGRESSBAR_ADVANCE = 17;	
@@ -104,8 +106,8 @@ function process() {
 	}
 	
 	// Licensure data
-	var lic_start=text.indexOf('Current Licensure Data');
-	var lic_end=text.indexOf('Academic Appointments');
+	var lic_start=text.indexOf(LIC_START);
+	var lic_end=text.indexOf(LIC_END);
 	subtext=text.substring(lic_start, lic_end);
 	if (subtext.length<10) {
 		// no license block present
