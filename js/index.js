@@ -27,7 +27,7 @@ $(document).ready(function() {
 		complete: function() { progressLabel.text( "Complete!" ); }
 	});
 
-	$('#doit').on('click', function(){process();});
+	$('#doit').on('click', function(){upload();});
 	$('#clear').on('click', function(){reset_form();});
 });
 
@@ -52,6 +52,25 @@ function modal_dialog(title, htmltext) {
 		buttons: {
 			Close: function() {$(this).dialog("close");}
 		}
+	});
+}
+
+function upload() {
+	$.ajax({
+		url: 'php/pdfread.php',
+		type: 'post',
+		data: new FormData($('#adsform')[0]),
+		contentType: false,
+		cache: false,
+		dataType: 'text',
+		processData: false,
+	}).error(function(xhr){
+		console.log("error with AJAX PDF upload");
+		console.dir(xhr);
+	}).success(function(response) {
+		console.log(response);
+		$('#adstext').val(response);
+		process();
 	});
 }
 

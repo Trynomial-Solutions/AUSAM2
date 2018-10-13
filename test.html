@@ -7,10 +7,14 @@
 <script>
 $(function(){
 	$('#btn').on('click', function(e) {
+		var data=new FormData($('#form1')[0]);
+//		console.dir($('#fileField')[0].files[0]);
+//		data.append('file', $('#fileField')[0].files[0]);
+		
 		$.ajax({
 			url: 'php/pdfread.php',
 			type: 'post',
-			data: new FormData(this.form),
+			data: data,
 			contentType: false,
 			cache: false,
 			processData: false,
