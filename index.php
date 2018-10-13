@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
 <title>ACGME Annual Update Error Screener</title>
 <!-- 
 <link href="../css/themes/HFEM.min.css" rel="stylesheet" type="text/css" />
