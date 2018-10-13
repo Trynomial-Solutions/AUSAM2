@@ -89,9 +89,13 @@ function process() {
 
 	// process PMIDs
 	var fac_start=text.indexOf(FAC_SA_START);
+	if (fac_start===-1) {fac_start=text.indexOF(FAC_SA_START.toUpperCase());}
 	var fac_end=text.indexOf(FAC_SA_END);
+	if (fac_end===-1) {fac_end=text.indexOF(FAC_SA_END.toUpperCase());}
 	var res_start=text.indexOf(RES_SA_START);
+	if (res_start===-1) {res_start=text.indexOF(RES_SA_START.toUpperCase());}
 	var res_end=text.indexOf(RES_SA_END);
+	if (res_end===-1) {res_end=text.indexOF(RES_SA_END.toUpperCase());}
 	var subtext=text.substring(fac_start, fac_end)+text.substring(res_start, res_end);
 	if (subtext.length<10) {
 		// no scholarly activity block present
@@ -113,7 +117,8 @@ function process() {
 			success: function(rval){
 				pb_val=$('#progressbar').progressbar("value");
 				$('#progressbar').progressbar("value", pb_val+PROGRESSBAR_ADVANCE);
-				console.log(JSON.stringify(rval, null, 4));
+				console.log("PubMed AJAX returned:");
+				console.dir(rval);
 				pmid_processed(rval);
 			},
 			error: function( xhr) {
@@ -142,7 +147,8 @@ function process() {
 			success: function(rval){
 				pb_val=$('#progressbar').progressbar("value");
 				$('#progressbar').progressbar("value", pb_val+PROGRESSBAR_ADVANCE);
-				console.log(JSON.stringify(rval, null, 4));
+				console.log("License AJAX returned:");			
+				console.dir(rval);
 				lic_processed(rval);
 			},
 			error: function( xhr) {
@@ -164,7 +170,7 @@ function process() {
 		$('#progressbar').progressbar("value", pb_val+PROGRESSBAR_ADVANCE+PROGRESSBAR_ADVANCE);
 	}
 	else {
-		console.log(subtext);
+//		console.log(subtext);
 		$.ajax({
 			url: "php/boardcert_check.php",
 			data: {boardblock: subtext},
@@ -173,7 +179,8 @@ function process() {
 			success: function(rval){
 				pb_val=$('#progressbar').progressbar("value");
 				$('#progressbar').progressbar("value", pb_val+PROGRESSBAR_ADVANCE);
-				console.log(JSON.stringify(rval, null, 4));
+				console.log("Board AJAX returned:");			
+				console.dir(rval);
 				board_processed(rval);
 			},
 			error: function( xhr) {
