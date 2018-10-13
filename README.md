@@ -2,9 +2,14 @@
 
 v2 - incorporates scholarly activity tracker + board cert checker + PD state licence checker
 
-Issues:
-* Board cert checker misses a lot of lines due to unusual formatting. Try this alternate regex \d(\D+)\s+(ABMS|AOA)\s+(\d{4})\s+([ROLNM])\s+-?(\d{4})?
+## Updates:
+**2018-10:**
+* Updated code to support ACGME's reformatted "Print Annual Update" page
+* Improve board cert extraction code, now supports multiple boards and works well. Tested with HFH EM, EMIM, EMIMCCM, TY and all faculty are being picked up
 
-Demo 
-http://www.henryfordem.com/ausam/
-http://www.henryfordem.com/ausam2/
+## Issues:
+**2018-10:**
+* Does not work off PDF version, as text is formatted differently
+
+## Demo 
+https://ausam.meded.app
