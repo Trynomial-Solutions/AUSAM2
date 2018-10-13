@@ -26,8 +26,9 @@
 <div id="content">
     <div id="form_div">
         <form id="adsform" name="adsform" method="post">
-            <p>
-            <textarea rows="10" name="adstext" id="adstext" placeholder="Paste block of text from ADS" required></textarea>
+			<p><label for='adsfile'>Please upload PDF file:</label>
+				<input type="file" name='adsfile' id='adsfile'>
+				<input type="hidden" name='adstext' id='adstext'>
             </p>
             <div id="progressbar"><div class="progress-label">Loading...</div></div>
             <p><label for="acyr">Applicable academic year:</label>

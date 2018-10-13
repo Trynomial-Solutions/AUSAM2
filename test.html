@@ -3,6 +3,26 @@
 <head>
 <meta charset="utf-8">
 <title>Untitled Document</title>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+$(function(){
+	$('#btn').on('click', function(e) {
+		$.ajax({
+			url: 'php/pdfread.php',
+			type: 'post',
+			data: new FormData(this.form),
+			contentType: false,
+			cache: false,
+			processData: false,
+		}).error(function(xhr){
+			console.log("error with AJAX PDF upload");
+			console.dir(xhr);
+		}).success(function(response) {
+			console.log(response);
+		});
+	});
+});
+</script>
 </head>
 
 <body>
@@ -13,7 +33,7 @@
 		<input type="file" name="fileField" id="fileField">
 	</p>
 	<p>
-		<input type="submit" name="submit" id="submit" value="Submit">
+		<input type="button" name="btn" id="btn" value="Submit">
 	</p>
 </form>
 </body>
