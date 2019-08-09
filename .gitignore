@@ -5,3 +5,5 @@ composer.lock
 *.LCK
 /samples/TY.pdf
 /samples/RC.pdf
+/samples/HFEM2019.html
+/samples/HFEM2019_files/
