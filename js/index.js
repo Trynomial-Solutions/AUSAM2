@@ -1,6 +1,6 @@
 // these constants define boundaries of text in the ADS. For example faculty scholarly activity is between the text listed in FAC_SA_START and FAC_SA_END
 const FAC_SA_START = "Faculty Scholarly Activity";
-const FAC_SA_END = "Resident Appointments";
+const FAC_SA_END = "Faculty Development";
 const RES_SA_START = "Resident Scholarly Activity";
 const RES_SA_END = "List Of Residents On Leave";
 const BOARD_DATA_START = "Physician Faculty Roster";
@@ -78,6 +78,7 @@ function process() {
 	var res_end=text.indexOf(RES_SA_END);
 	if (res_end===-1) {res_end=text.indexOf(RES_SA_END.toUpperCase());}
 	var subtext=text.substring(fac_start, fac_end)+text.substring(res_start, res_end);
+   console.log(fac_start, fac_end, res_start, res_end, subtext);
 	if (subtext.length<10) {
 		// no scholarly activity block present
 		$('#pmid_table').append('<tr><td colspan="4">'+NOT_FOUND_HTML+'</td></tr>');
