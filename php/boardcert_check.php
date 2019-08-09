@@ -71,15 +71,32 @@ $dom=new DOMDocument();
 $dom->loadHTML($_POST['boardblock']);
 $xpath=new DOMXPath($dom);
 
+$faculty=array();
+$i=-1;
 $rows=$xpath->query("//table[@id='tblRoster']/tbody/tr");
 if (!is_null($rows)) {
     foreach ($rows as $row) {
         // the first cell in this table has a rowspan that indicates how many board certifications are under it
         $firstcell_rowspan=$row->firstChild->attributes->getNamedItem('rowspan');
+        $cells=$row->childNodes;
+        if ($firstcell_rowspan!==null) {
+            // new faculty
+            $i++;
+            $faculty[$i]['name']=trim($cells->item(0)->childNodes->item(0)->nodeValue); // faculty name is a child node of 1st cell
+            $faculty[$i]['specialty']=$cells->item(6)->nodeValue;
+            $faculty[$i]['board']=$cells->item(8)->nodeValue;
+            $faculty[$i]['origyear']=$cells->item(10)->nodeValue;
+            $faculty[$i]['status']=$cells->item(12)->nodeValue;
+            $faculty[$i]['expyear']=$cells->item(14)->nodeValue;
+        }
+        else {
+            // additional certifications for the same faculty
+        }
         $firstcell_rowspan=($firstcell_rowspan===null) ? 0 : $firstcell_rowspan->nodeValue;
-        echo "<p>".$row->firstChild->nodeValue.";".$firstcell_rowspan;
+//        echo "<p>".$row->firstChild->nodeValue.";".$firstcell_rowspan;
     }   
 }
+print_r($faculty);
 exit;
 
 
