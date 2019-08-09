@@ -57,10 +57,34 @@ $rVal=array(
 	"results" => array ()
 );
 
+// DEBUG - LOAD HTML *********************
+$_POST['boardblock']=file_get_contents("../samples/HFEM2019.html");
+
 if ((!isset($_POST['boardblock'])) || (strlen($_POST['boardblock'])<10)) err(1, "Missing board text block");
 
 // extract all info from boardblock
 // 2019 ADS update - new regex needed. Trying (ABMS|AOA) Certified.+(\d{4}).+([ROLMNC])\s+(\d{4}){0,1}
+
+
+
+$dom=new DOMDocument();
+$dom->loadHTML($_POST['boardblock']);
+$xpath=new DOMXPath($dom);
+
+$rows=$xpath->query("//table[@id='tblRoster']/tbody/tr");
+if (!is_null($rows)) {
+    foreach ($rows as $row) {
+        echo "<p>[". $row->nodeName. "]";
+        echo ";".$row->firstChild->nodeValue;
+        echo ";".$row->firstChild->attributes->getNamedItem('rowspan')->nodeValue;
+    }   
+}
+exit;
+
+
+
+
+
 preg_match_all('/(([\w -]+), .*[\r\n]+\D+\d{1,2}\t)?([\w ]+)\t(ABMS|AOA)\s+(\d{4})\s+([ROLNMC])\s+(--|\d{4})/m', $_POST['boardblock'], $matches, PREG_SET_ORDER);
 
 $boardcerts=array();
