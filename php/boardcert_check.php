@@ -60,6 +60,7 @@ $rVal=array(
 if ((!isset($_POST['boardblock'])) || (strlen($_POST['boardblock'])<10)) err(1, "Missing board text block");
 
 // extract all info from boardblock
+// 2019 ADS update - new regex needed. Trying (ABMS|AOA) Certified.+(\d{4}).+([ROLMNC])\s+(\d{4}){0,1}
 preg_match_all('/(([\w -]+), .*[\r\n]+\D+\d{1,2}\t)?([\w ]+)\t(ABMS|AOA)\s+(\d{4})\s+([ROLNMC])\s+(--|\d{4})/m', $_POST['boardblock'], $matches, PREG_SET_ORDER);
 
 $boardcerts=array();

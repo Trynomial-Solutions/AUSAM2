@@ -78,7 +78,7 @@ function process() {
 	var res_end=text.indexOf(RES_SA_END);
 	if (res_end===-1) {res_end=text.indexOf(RES_SA_END.toUpperCase());}
 	var subtext=text.substring(fac_start, fac_end)+text.substring(res_start, res_end);
-   console.log(fac_start, fac_end, res_start, res_end, subtext);
+   // console.log(fac_start, fac_end, res_start, res_end, subtext);
 	if (subtext.length<10) {
 		// no scholarly activity block present
 		$('#pmid_table').append('<tr><td colspan="4">'+NOT_FOUND_HTML+'</td></tr>');
@@ -151,6 +151,7 @@ function process() {
 	var board_end=text.indexOf(BOARD_DATA_END);
 	if (board_end===-1) {board_end=text.indexOf(BOARD_DATA_END.toUpperCase());}
 	subtext=text.substring(board_start, board_end);
+   console.log(board_start, board_end, subtext);
 	if (subtext.length<10) {
 		// no board cert data present
 		$('#board_table').append("<tr><td colspan='3'>"+NOT_FOUND_HTML+"</td></tr>");
