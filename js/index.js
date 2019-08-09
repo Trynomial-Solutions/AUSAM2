@@ -3,8 +3,6 @@ const FAC_SA_START = "Faculty Scholarly Activity";
 const FAC_SA_END = "Faculty Development";
 const RES_SA_START = "Resident Scholarly Activity";
 const RES_SA_END = "List Of Residents On Leave";
-const BOARD_DATA_START = "Physician Faculty Roster";
-const BOARD_DATA_END = "Non-Physician Faculty Roster";
 const LIC_START = 'Current Licensure Data';
 const LIC_END = 'Academic Appointments';
 
@@ -145,41 +143,26 @@ function process() {
 		});
 	}
 	
-	// Board certification data
-	var board_start=text.indexOf(BOARD_DATA_START);
-	if (board_start===-1) {board_start=text.indexOf(BOARD_DATA_START.toUpperCase());}
-	var board_end=text.indexOf(BOARD_DATA_END);
-	if (board_end===-1) {board_end=text.indexOf(BOARD_DATA_END.toUpperCase());}
-	subtext=text.substring(board_start, board_end);
-   console.log(board_start, board_end, subtext);
-	if (subtext.length<10) {
-		// no board cert data present
-		$('#board_table').append("<tr><td colspan='3'>"+NOT_FOUND_HTML+"</td></tr>");
-		$('#board_table').show();
-		pb_val=$('#progressbar').progressbar("value");
-		$('#progressbar').progressbar("value", pb_val+PROGRESSBAR_ADVANCE+PROGRESSBAR_ADVANCE);
-	}
-	else {
-		$.ajax({
-			url: "php/boardcert_check.php",
-			data: {boardblock: subtext},
-			dataType: "json",
-			method: "POST",
-			success: function(rval){
-				pb_val=$('#progressbar').progressbar("value");
-				$('#progressbar').progressbar("value", pb_val+PROGRESSBAR_ADVANCE);
-				console.log('Board Cert AJAX Returned:');
-				console.dir(rval);
-				board_processed(rval);
-			},
-			error: function( xhr, status, errorThrown ) {
-				modal_dialog( "AJAX error", "Unexpected result. Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a>" );
-				console.log( "Error: " + errorThrown );
-				console.log( "Status: " + status );
-				console.dir( xhr );
-			}
-		});
-	}
+	// Board certification data - send all html
+    $.ajax({
+        url: "php/boardcert_check.php",
+        data: {boardblock: text},
+        dataType: "json",
+        method: "POST",
+        success: function(rval){
+            pb_val=$('#progressbar').progressbar("value");
+            $('#progressbar').progressbar("value", pb_val+PROGRESSBAR_ADVANCE);
+            console.log('Board Cert AJAX Returned:');
+            console.dir(rval);
+            board_processed(rval);
+        },
+        error: function( xhr, status, errorThrown ) {
+            modal_dialog( "AJAX error", "Unexpected result. Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a>" );
+            console.log( "Error: " + errorThrown );
+            console.log( "Status: " + status );
+            console.dir( xhr );
+        }
+    });
 }
 
 function pmid_processed(rval) {
