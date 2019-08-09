@@ -74,9 +74,10 @@ $xpath=new DOMXPath($dom);
 $rows=$xpath->query("//table[@id='tblRoster']/tbody/tr");
 if (!is_null($rows)) {
     foreach ($rows as $row) {
-        echo "<p>[". $row->nodeName. "]";
-        echo ";".$row->firstChild->nodeValue;
-        echo ";".$row->firstChild->attributes->getNamedItem('rowspan')->nodeValue;
+        // the first cell in this table has a rowspan that indicates how many board certifications are under it
+        $firstcell_rowspan=$row->firstChild->attributes->getNamedItem('rowspan');
+        $firstcell_rowspan=($firstcell_rowspan===null) ? 0 : $firstcell_rowspan->nodeValue;
+        echo "<p>".$row->firstChild->nodeValue.";".$firstcell_rowspan;
     }   
 }
 exit;
