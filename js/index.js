@@ -245,7 +245,7 @@ function board_processed(rval) {
 		var rowid="staffid_"+key;
 		var toappend='<tr id="'+rowid+'"><td>'+val.name+'</td><td>'+val.specialty+'</td><td>';
 		if (val.issues!==0) {toappend+=val.descr;}
-		else {toappend+="&nbsp;";}
+		else {toappend+="OK";}
 		toappend+="</td></tr>";
 		$('#board_table').append(toappend);
 		if (val.issues===1) {$('#'+rowid).children('td').addClass('flag_row');}
