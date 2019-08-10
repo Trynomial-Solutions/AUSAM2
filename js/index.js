@@ -47,6 +47,7 @@ function reset_form() {
 	$('#license').removeClass();
 	$('#board_table').hide();
 	$('#board_table').find("tr:gt(0)").remove();
+    pmid_count=pmid_errors=lic_count=lic_errors=board_count=board_errors=0;
 }
 
 function modal_dialog(title, htmltext) {
@@ -212,6 +213,7 @@ function pmid_processed(rval) {
 	var val=$('#progressbar').progressbar("value");
 	$('#progressbar').progressbar("value", val+PROGRESSBAR_ADVANCE);
     pmid_errors=flags+nomatch;
+    console.log("PMIDs: "+pmid_count+" Processed, "+pmid_errors+" Errors");
 }
 
 function lic_processed(rval) {
