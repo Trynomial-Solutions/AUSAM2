@@ -59,7 +59,7 @@ $rVal=array(
 );
 
 // DEBUG - LOAD HTML *********************
-$_POST['boardblock']=file_get_contents("../samples/WYSurg.html");
+// $_POST['boardblock']=file_get_contents("../samples/WYSurg.html");
 
 if ((!isset($_POST['boardblock'])) || (strlen($_POST['boardblock'])<10)) err(1, "Missing board text block");
 
