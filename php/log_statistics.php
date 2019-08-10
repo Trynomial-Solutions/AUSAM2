@@ -1,18 +1,21 @@
 <?php
 // Log statistics of AUSAM2 use
-$ip=get_ip_address();
+if (($ip=get_ip_address())!=false) $geolocate=get_geolocate($ip);
 
 require_once("connecti.inc.php");
-$sql="INSERT INTO ausam2_stats (pmid_count, pmid_errors, lic_count, lic_errors, board_count, board_errors, ip) VALUES (?, ?, ?, ?, ?, ?, ?)";
-$stmt=$dbi->prepare($sql);
-$stmt->bind_param("iiiiiis", 
+$sql="INSERT INTO ausam2_stats (pmid_count, pmid_errors, lic_count, lic_errors, board_count, board_errors, ip, zip, org) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$stmt=$dbi->prepare($sql) or die ($dbi->error);
+$stmt->bind_param("iiiiiisss", 
                   $_POST['pmid_count'],
                   $_POST['pmid_errors'],
                   $_POST['lic_count'],
                   $_POST['lic_errors'],
                   $_POST['board_count'],
                   $_POST['board_errors'],
-                  $ip);
+                  $ip,
+                  $geolocate['zip'],
+                  $geolocate['org']
+                 );
 $stmt->execute();
 $stmt->close();
 
@@ -28,5 +31,13 @@ function get_ip_address(){
             }
         }
     }
+}
+
+function get_geolocate($ip) {
+    $url="http://ip-api.com/json/".$ip;
+    $json=json_decode(file_get_contents($url));
+    $rVal=array('zip' => $json->zip, 'org' => $json->org);
+    print_r($json);
+    return $rVal;
 }
 ?>
