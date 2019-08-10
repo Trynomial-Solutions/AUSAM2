@@ -27,7 +27,7 @@
     <div id="form_div">
         <form id="adsform" name="adsform" method="post">
             <p>
-            <textarea rows="10" name="adstext" id="adstext" placeholder="Paste block of text from ADS" required></textarea>
+            <textarea rows="10" name="adstext" id="adstext" placeholder="Paste block of HTML code from ADS" required></textarea>
             </p>
             <div id="progressbar"><div class="progress-label">Loading...</div></div>
             <p><label for="acyr">Applicable academic year:</label>
