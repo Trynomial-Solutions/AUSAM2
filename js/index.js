@@ -90,9 +90,13 @@ function process() {
 	// form submitted
 	"use strict";
 	if ($('#adstext').val().length<10) {
-		modal_dialog("Missing Data", "Please copy-paste entire text of ADS annual update. You can view <a href='"+DEMO_VIDEO_URL+"'>instructions</a> here.");
+		modal_dialog("Missing Data", "Please copy-paste entire HTML code from ADS annual update. You can view <a href='"+DEMO_VIDEO_URL+"'>instructions</a> here.");
 		return false;
 	}
+    if ($('#adstext').val().search("<html>")==-1) {
+        modal_dialog("Need HTML Code", "You must paste the HTML code from the ADS page, as explained in the <a href='"+DEMO_VIDEO_URL+"'>updated instructions</a> here. <p>&nbsp;<p>To summarize, hold down <b>Ctrl</b> and press <b>U, A, C</b> on the 'Print Annual Update' page and paste that code here.");
+        return false;
+    }
 	
 	reset_form();
 	$('#progressbar').show();
