@@ -225,15 +225,18 @@ function lic_processed(rval) {
 		return false;
 	}
 
+    lic_count=1;
 	$('#license').append('<p>PD\'s License Expiration: '+rval.month+' '+rval.year+'. <i>'+rval.months_to_exp+' month(s) remain.</i></p>');
 	if (rval.expired===1) {
 		$('#license').addClass('flag_row');
+        lic_errors=1;
 	}
 	else if (rval.months_to_exp<=6) {
 		$('#license').addClass('nomatch_row');
 	}
 	var val=$('#progressbar').progressbar("value");
 	$('#progressbar').progressbar("value", val+PROGRESSBAR_ADVANCE);
+    console.log("Licenses Processed: "+lic_count+", errors: "+lic_errors);
 }
 
 function board_processed(rval) {
@@ -254,17 +257,22 @@ function board_processed(rval) {
 	}
 	
 	$.each(rval.results, function(key, val) {
+        board_count++;
 		var rowid="staffid_"+key;
 		var toappend='<tr id="'+rowid+'"><td>'+val.name+'</td><td>'+val.specialty+'</td><td>';
-		if (val.issues!==0) {toappend+=val.descr;}
+		if (val.issues!==0) { toappend+=val.descr; }
 		else {toappend+="OK";}
 		toappend+="</td></tr>";
 		$('#board_table').append(toappend);
-		if (val.issues===1) {$('#'+rowid).children('td').addClass('flag_row');}
+		if (val.issues===1) {
+            $('#'+rowid).children('td').addClass('flag_row');
+            board_errors++;
+        }
 		else if (val.issues===2) {$('#'+rowid).children('td').addClass('nomatch_row');}
 	});
 
 	$('#board_table').show();
 	var pb_val=$('#progressbar').progressbar("value");
 	$('#progressbar').progressbar("value", pb_val+PROGRESSBAR_ADVANCE);
+    console.log("Board Certs processed: "+board_count+", errors: "+board_errors);
 }
