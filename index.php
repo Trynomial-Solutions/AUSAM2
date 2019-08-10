@@ -9,10 +9,10 @@
 <link href="../css/themes/jquery.mobile.icons.min.css" rel="stylesheet" type="text/css" />
 <link href="https://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" rel="stylesheet" type="text/css">
 -->
-<link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+<link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
 <link href="css/index.css" rel="stylesheet" type="text/css">
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <!-- <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> -->
 <script src="js/index.js"></script>
 </head>
