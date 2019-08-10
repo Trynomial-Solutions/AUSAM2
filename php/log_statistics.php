@@ -37,7 +37,7 @@ function get_geolocate($ip) {
     $url="http://ip-api.com/json/".$ip;
     $json=json_decode(file_get_contents($url));
     $rVal=array('zip' => $json->zip, 'org' => $json->org);
-    print_r($json);
+//    print_r($json);
     return $rVal;
 }
 ?>
