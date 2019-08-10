@@ -10,13 +10,13 @@ function err($code, $text) {
 	exit($code);
 }
 
-function board_check($status, $origyear, $expyear) {
+function board_check($status, int $origyear, int $expyear) {
 	// process board dates - return 0 if okay, 1 if hard fail, 2 if soft fail
 	$rVal=array("code" => 0, "error" => "");
 	$thisyear=date("Y");
 	switch ($status) {
 		case "R":
-			if (($expyear+0)===0) {$rVal['code']=1; $rVal['error']="No expiration year listed";}
+			if ($expyear===0) {$rVal['code']=1; $rVal['error']="No expiration year listed";}
 			else if ($thisyear > $expyear) {$rVal['code']=1; $rVal['error']="Recert expired"; }
 			else {$rVal['code']=2; $rVal['error']="Should this be 'M' or 'C' (participating in MOC/OCC)?";}
 			return $rVal;
@@ -39,7 +39,7 @@ function board_check($status, $origyear, $expyear) {
 			
 		case "M":
 		case "C":
-            if ((($expyear+0)!==0) && ($expyear < $thisyear)) {$rVal['code']=1; $rVal['error']="Certification expired";}
+            if (($expyear!=0) && ($expyear < $thisyear)) {$rVal['code']=1; $rVal['error']="Certification expired";}
 			return $rVal;
 			break;
 			
@@ -82,9 +82,9 @@ foreach ($rows as $row) {
         $faculty[$i]['certcount']=$firstcell_rowspan->nodeValue;
         $faculty[$i]['boards'][0]['specialty']=$cells->item(6)->nodeValue;
         $faculty[$i]['boards'][0]['boardname']=$cells->item(8)->nodeValue;
-        $faculty[$i]['boards'][0]['origyear']=$cells->item(10)->nodeValue;
+        $faculty[$i]['boards'][0]['origyear']=(int) $cells->item(10)->nodeValue;
         $faculty[$i]['boards'][0]['status']=$cells->item(12)->nodeValue;
-        $faculty[$i]['boards'][0]['expyear']=$cells->item(14)->nodeValue;
+        $faculty[$i]['boards'][0]['expyear']=(int) $cells->item(14)->nodeValue;
         $certcounter=0;
     }
     else {
@@ -92,44 +92,25 @@ foreach ($rows as $row) {
         $certcounter++;
         $faculty[$i]['boards'][$certcounter]['specialty']=$cells->item(0)->nodeValue;
         $faculty[$i]['boards'][$certcounter]['boardname']=$cells->item(2)->nodeValue;
-        $faculty[$i]['boards'][$certcounter]['origyear']=$cells->item(4)->nodeValue;
+        $faculty[$i]['boards'][$certcounter]['origyear']=(int) $cells->item(4)->nodeValue;
         $faculty[$i]['boards'][$certcounter]['status']=$cells->item(6)->nodeValue;
-        $faculty[$i]['boards'][$certcounter]['expyear']=$cells->item(8)->nodeValue;
+        $faculty[$i]['boards'][$certcounter]['expyear']=(int) $cells->item(8)->nodeValue;
     }
 }   
-print_r($faculty);
-exit;
+//print_r($faculty);
 
-
-
-
-
-preg_match_all('/(([\w -]+), .*[\r\n]+\D+\d{1,2}\t)?([\w ]+)\t(ABMS|AOA)\s+(\d{4})\s+([ROLNMC])\s+(--|\d{4})/m', $_POST['boardblock'], $matches, PREG_SET_ORDER);
-
-$boardcerts=array();
-foreach($matches as $match) {
-	if ($match[2]!='') {
-		// new faculty
-		$bc=array();
-		$bc['name']=$match[2];
-	}
-	$bc['specialty']=$match[4]." ".$match[3];
-	$bc['orig_year']=$match[5];
-	$bc['status']=$match[6];
-	if ($match[7]==='--') $match[7]=null;
-	$bc['recert_year']=$match[7];
-	$boardcerts[]=$bc;
-}
-
-// verify board certifications
-foreach ($boardcerts as $bc) {
-	$r=array();
-	$check=board_check($bc['status'], $bc['orig_year'], $bc['recert_year']);
-	$r['name']=$bc['name'];
-	$r['specialty']=$bc['specialty'];
-	$r['issues']=$check['code'];
-	if ($check['code']!==0) $r['descr']=$check['error'];
-	$rVal['results'][]=$r;
+// check validity of data reported
+foreach ($faculty as $fac) {
+    foreach ($fac['boards'] as $board) {
+        $check=board_check($board['status'], $board['origyear'], $board['expyear']);
+        $r=array('name' => $fac['name'],
+                 'specialty' => $board['specialty'],
+                 'issues' => $check['code'],
+                 'descr' => ($check['code']!=0) ? $check['error'] : null);
+//        print_r($r);
+        $rVal['results'][]=$r;
+                 
+    }
 }
 
 header('Content-Type: application/json');
