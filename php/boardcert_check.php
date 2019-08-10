@@ -10,35 +10,36 @@ function err($code, $text) {
 	exit($code);
 }
 
-function board_check($type, $init, $recert) {
+function board_check($status, $origyear, $expyear) {
 	// process board dates - return 0 if okay, 1 if hard fail, 2 if soft fail
 	$rVal=array("code" => 0, "error" => "");
 	$thisyear=date("Y");
-	switch ($type) {
+	switch ($status) {
 		case "R":
-			if (($recert+0)===0) {$rVal['code']=1; $rVal['error']="No recert year listed";}
-			else if (($thisyear - $recert) > 10) {$rVal['code']=1; $rVal['error']="Recert possibly expired"; }
+			if (($expyear+0)===0) {$rVal['code']=1; $rVal['error']="No expiration year listed";}
+			else if ($thisyear > $expyear) {$rVal['code']=1; $rVal['error']="Recert expired"; }
 			else {$rVal['code']=2; $rVal['error']="Should this be 'M' or 'C' (participating in MOC/OCC)?";}
 			return $rVal;
 			break;
 			
 		case "O":
-			if (($thisyear - $init) > 10) {$rVal['code']=1; $rVal['error']="Original cert possibly expired. Check if recertified or time-unlimited certification"; }
+			if (($thisyear - $origyear) > 10) {$rVal['code']=1; $rVal['error']="Original cert possibly expired. Check if recertified or time-unlimited certification"; }
 			return $rVal;
 			break;
 			
 		case "L":
-			$rVal['code']=1; $rVal['error']="Certification lapsed"; 
+			$rVal['code']=2; $rVal['error']="Confirm lapsed certification (no longer certified)"; 
 			return $rVal;
 			break;
 
 		case "N":
-			if ($init > 2000) {$rVal['code']=1; $rVal['error']="Confirm time-unlimited certification"; }
+			if ($origyear > 2000) {$rVal['code']=1; $rVal['error']="Confirm time-unlimited certification"; }
 			return $rVal;
 			break;
 			
 		case "M":
 		case "C":
+            if ((($expyear+0)!==0) && ($expyear < $thisyear)) {$rVal['code']=1; $rVal['error']="Certification expired";}
 			return $rVal;
 			break;
 			
@@ -64,7 +65,7 @@ if ((!isset($_POST['boardblock'])) || (strlen($_POST['boardblock'])<10)) err(1, 
 
 // extract all info from boardblock
 $dom=new DOMDocument();
-$dom->loadHTML($_POST['boardblock']);
+@$dom->loadHTML($_POST['boardblock']);  // suppress error due to malformed HTML from ACGME
 $xpath=new DOMXPath($dom);
 
 $faculty=array();
