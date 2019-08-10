@@ -59,7 +59,7 @@ $rVal=array(
 );
 
 // DEBUG - LOAD HTML *********************
-//$_POST['boardblock']=file_get_contents("../samples/HFEM2019.html");
+$_POST['boardblock']=file_get_contents("../samples/WYSurg.html");
 
 if ((!isset($_POST['boardblock'])) || (strlen($_POST['boardblock'])<10)) err(1, "Missing board text block");
 
@@ -68,9 +68,17 @@ $dom=new DOMDocument();
 @$dom->loadHTML($_POST['boardblock']);  // suppress error due to malformed HTML from ACGME
 $xpath=new DOMXPath($dom);
 
+// remove non-physician faculty div - ACGME HTML has this table with the same ID as the physician faculty table, which means anything is here is appended in the DOM to the physician faculty table. Needs to be deleted to prevent errors
+$npfac=$xpath->query("//h3[text()='Non-Physician Faculty Roster']/../..");
+$nonphys_div=$npfac->item(0);
+while ($nonphys_div->hasChildNodes()) {
+     $nonphys_div->removeChild($nonphys_div->firstChild);
+}
+
 $faculty=array();
 $i=-1;
 $rows=$xpath->query("//table[@id='tblRoster']/tbody/tr");
+
 foreach ($rows as $row) {
     // the first cell in this table has a rowspan that indicates how many board certifications are under it
     $firstcell_rowspan=$row->firstChild->attributes->getNamedItem('rowspan');
