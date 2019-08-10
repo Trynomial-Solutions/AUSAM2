@@ -17,7 +17,7 @@ function board_check($status, int $origyear, int $expyear) {
 	switch ($status) {
 		case "R":
 			if ($expyear===0) {$rVal['code']=1; $rVal['error']="No expiration year listed";}
-			else if ($thisyear > $expyear) {$rVal['code']=1; $rVal['error']="Recert expired"; }
+			else if ($thisyear > $expyear) {$rVal['code']=1; $rVal['error']="Recert likely expired"; }
 			else {$rVal['code']=2; $rVal['error']="Should this be 'M' or 'C' (participating in MOC/OCC)?";}
 			return $rVal;
 			break;
@@ -59,7 +59,7 @@ $rVal=array(
 );
 
 // DEBUG - LOAD HTML *********************
-$_POST['boardblock']=file_get_contents("../samples/HFEM2019.html");
+//$_POST['boardblock']=file_get_contents("../samples/HFEM2019.html");
 
 if ((!isset($_POST['boardblock'])) || (strlen($_POST['boardblock'])<10)) err(1, "Missing board text block");
 
