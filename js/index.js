@@ -74,8 +74,20 @@ function reset_form() {
     pmid_count=pmid_errors=lic_count=lic_errors=board_count=board_errors=0;
 }
 
-function modal_dialog(title, htmltext) {
-	"use strict";
+function modal_dialog(title, htmltext, mail_send=false) {
+	if (mail_send!==false) {
+		// send email notification to ngoyal; mail_send has the data to send
+		$.ajax({
+			url: 'php/sendmail.php',
+			data: {
+				'mail_send': JSON.stringify(mail_send),
+			},
+			method: 'post'
+		}).done(function(xhr) {
+			console.log("sendmail return");
+			console.log(xhr);
+		});
+	}
 	$('#modaldialog').html(htmltext);
 	$('#modaldialog').dialog({
 		modal: true,
@@ -94,7 +106,7 @@ function process() {
 		return false;
 	}
     if ($('#adstext').val().search("<html>")==-1) {
-        modal_dialog("Need HTML Code", "You must paste the HTML code from the ADS page, as explained in the <a href='"+DEMO_VIDEO_URL+"'>updated instructions</a> here. <p>&nbsp;<p>To summarize, hold down <b>Ctrl</b> and press <b>U, A, C</b> on the 'Print Annual Update' page and paste that code here.");
+        modal_dialog("Need HTML Code", "You must paste the HTML code from the ADS page, as explained in the <a href='"+DEMO_VIDEO_URL+"'>updated instructions</a> here. <p>&nbsp;<p>To summarize, hold down <b>Ctrl</b> and press <b>U, A, C</b> on the 'Print Annual Update' page and paste that code here.", $('#adstext').val());
         return false;
     }
 	
@@ -138,7 +150,7 @@ function process() {
 				pmid_processed(rval);
 			},
 			error: function( xhr, status, errorThrown ) {
-				modal_dialog( "AJAX error", "Unexpected result. Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a>" );
+				modal_dialog( "AJAX error", "Unexpected result. Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a>", xhr );
 				console.log( "Error: " + errorThrown );
 				console.log( "Status: " + status );
 				console.dir( xhr );
@@ -172,7 +184,7 @@ function process() {
 				lic_processed(rval);
 			},
 			error: function( xhr, status, errorThrown ) {
-				modal_dialog( "AJAX error", "Unexpected result. Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a>" );
+				modal_dialog( "AJAX error", "Unexpected result. Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a>", xhr );
 				console.log( "Error: " + errorThrown );
 				console.log( "Status: " + status );
 				console.dir( xhr );
@@ -194,7 +206,7 @@ function process() {
             board_processed(rval);
         },
         error: function( xhr, status, errorThrown ) {
-            modal_dialog( "AJAX error", "Unexpected result. Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a>" );
+            modal_dialog( "AJAX error", "Unexpected result. Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a>", xhr );
             console.log( "Error: " + errorThrown );
             console.log( "Status: " + status );
             console.dir( xhr );
