@@ -167,7 +167,6 @@ $stmt->bind_param("iiii", $rVal['pmid_count'], $rVal['pmid_dated'], $pmid_oor, $
 $stmt->execute();
 $stmt->close();
 */
-
 header('Content-Type: application/json');
 echo json_encode($rVal);
 //print_r($rVal);
