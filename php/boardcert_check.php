@@ -10,9 +10,10 @@ function err($code, $text) {
 	exit($code);
 }
 
-function board_check($status, int $origyear, int $expyear) {
+function board_check($status, int $origyear, int $expyear, $boardname=null) {
 	// process board dates - return 0 if okay, 1 if hard fail, 2 if soft fail
 	$rVal=array("code" => 0, "error" => "");
+	if ($boardname=="Not Certified") {$rVal['code']=1; $rVal['error']="Not Certified"; return $rVal;}
 	$thisyear=date("Y");
 	switch ($status) {
 		case "R":
@@ -110,7 +111,7 @@ foreach ($rows as $row) {
 // check validity of data reported
 foreach ($faculty as $fac) {
     foreach ($fac['boards'] as $board) {
-        $check=board_check($board['status'], $board['origyear'], $board['expyear']);
+        $check=board_check($board['status'], $board['origyear'], $board['expyear'], $board['boardname']);
         $r=array('name' => $fac['name'],
                  'specialty' => $board['specialty'],
                  'issues' => $check['code'],
