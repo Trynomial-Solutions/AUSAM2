@@ -94,7 +94,7 @@ for ($i=date('Y')-2; $i<date('Y')+1; $i++) {
 </div>
 </div>
 <footer id="footer">
-<p>Please use at your own risk. Contact <a href="mailto:ngoyal1@hfhs.org">Nikhil Goyal</a> with questions or feedback</p>
+<p>Please use at your own risk. Coders, see <a href="https://github.com/MeWiz/AUSAM2">GitHub Repo</a>. Contact <a href="mailto:ngoyal1@hfhs.org">Nikhil Goyal</a> with questions or feedback</p>
 </footer>
 </body>
 </html>
