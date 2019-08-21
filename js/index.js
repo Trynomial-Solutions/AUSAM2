@@ -77,10 +77,11 @@ function reset_form() {
 function modal_dialog(title, htmltext, mail_send=false) {
 	if (mail_send!==false) {
 		// send email notification to ngoyal; mail_send has the data to send
+        var mailbody="Title: "+title+"\r\nErrorMsg: "+htmltext+"\r\n\r\nDebug: "+JSON.stringify(mail_send, null, 3);
 		$.ajax({
 			url: 'php/sendmail.php',
 			data: {
-				'mail_send': JSON.stringify(mail_send),
+				'mail_send': mailbody,
 			},
 			method: 'post'
 		}).done(function(xhr) {
