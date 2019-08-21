@@ -151,7 +151,7 @@ function process() {
 				pmid_processed(rval);
 			},
 			error: function( xhr, status, errorThrown ) {
-				modal_dialog( "AJAX error", "Unexpected result. Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a>", xhr );
+				modal_dialog( "PubMed AJAX error", "Unexpected result. Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a>", xhr );
 				console.log( "Error: " + errorThrown );
 				console.log( "Status: " + status );
 				console.dir( xhr );
@@ -185,7 +185,7 @@ function process() {
 				lic_processed(rval);
 			},
 			error: function( xhr, status, errorThrown ) {
-				modal_dialog( "AJAX error", "Unexpected result. Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a>", xhr );
+				modal_dialog( "License AJAX error", "Unexpected result. Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a>", xhr );
 				console.log( "Error: " + errorThrown );
 				console.log( "Status: " + status );
 				console.dir( xhr );
@@ -207,7 +207,7 @@ function process() {
             board_processed(rval);
         },
         error: function( xhr, status, errorThrown ) {
-            modal_dialog( "AJAX error", "Unexpected result. Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a>", xhr );
+            modal_dialog( "BoardCert AJAX error", "Unexpected result. Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a>", xhr );
             console.log( "Error: " + errorThrown );
             console.log( "Status: " + status );
             console.dir( xhr );
@@ -224,7 +224,7 @@ function pmid_processed(rval) {
 	}
 
 	if (rval.error.code!==0) {
-		modal_dialog("Error processing text", "Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a> with the entire text that you pasted in the box.<p><i>Error text: "+rval.error.text+"</i>");
+		modal_dialog("Error processing PubMed", "Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a> with the entire text that you pasted in the box.<p>", rval.error.text);
 		return false;
 	}
 
@@ -262,7 +262,7 @@ function lic_processed(rval) {
 	"use strict";
 	
 	if (rval.error.code!==0) {
-		modal_dialog("Error processing text", "Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a> with the entire text that you pasted in the box.<p><i>Error text: "+rval.error.text+"</i>");
+		modal_dialog("Error processing License", "Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a> with the entire text that you pasted in the box.<p>", rval.error.text);
 		return false;
 	}
 
@@ -292,7 +292,7 @@ function board_processed(rval) {
 			$('#progressbar').progressbar("value", val+PROGRESSBAR_ADVANCE);
 		}
 		else {
-			modal_dialog("Error processing text", "Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a> with the entire text that you pasted in the box.<p><i>Error text: "+rval.error.text+"</i>");
+			modal_dialog("Error processing BoardCert", "Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a> with the entire text that you pasted in the box.<p>", rval.error.text);
 		}
 		return false;
 	}
