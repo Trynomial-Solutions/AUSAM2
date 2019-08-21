@@ -1,6 +1,6 @@
 # AUSAM
 
-v2 - incorporates scholarly activity tracker + board cert checker + PD state licence checker
+v2 - incorporates scholarly activity tracker + board cert checker + PD state license checker
 
 ## Updates:
 **2019-08:**
