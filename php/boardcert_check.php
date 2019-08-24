@@ -60,7 +60,7 @@ $rVal=array(
 );
 
 // DEBUG - LOAD HTML *********************
-// $_POST['boardblock']=file_get_contents("../samples/WYSurg.html");
+$_POST['boardblock']=file_get_contents("../samples/WYSurg.html");
 
 if ((!isset($_POST['boardblock'])) || (strlen($_POST['boardblock'])<10)) err(1, "Missing board text block");
 
@@ -75,6 +75,11 @@ $nonphys_div=$npfac->item(0);
 while ($nonphys_div->hasChildNodes()) {
      $nonphys_div->removeChild($nonphys_div->firstChild);
 }
+
+// check if this table has expiration year data - apparently some fellowships do not ask this (Geriatrics)
+$header_row=$xpath->query("//table[@id='tblRoster']/thead/tr[2]/th[text()='Expiration Year']");
+echo ($header_row->count());
+exit;
 
 $faculty=array();
 $i=-1;
