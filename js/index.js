@@ -23,6 +23,7 @@ const NOT_FOUND_HTML = "<p><i><b>Could not find any info for this category. This
 
 $(document).ready(function() {
 	"use strict";
+    
 	$("#tabs").tabs();
 
 	var progressbar = $( "#progressbar" ), progressLabel = $( ".progress-label" );
@@ -37,27 +38,32 @@ $(document).ready(function() {
 	$('#clear').on('click', function(){reset_form();});
     $('#progressbar').progressbar({complete: function(event, ui){
         // completed; write stats to db
-        setTimeout(function() {
-            $.ajax({
-                url: 'php/log_statistics.php',
-                data: {
-                    'pmid_count': pmid_count,
-                    'pmid_errors': pmid_errors,
-                    'lic_count': lic_count,
-                    'lic_errors': lic_errors,
-                    'board_count': board_count,
-                    'board_errors': board_errors,
-                },
-                dataType: 'text',
-                method: 'post',
-            }).success(function(){
-                console.log("Stats recorded");
-            }).error(function( xhr, status, errorThrown ) {
-				console.log( "Error writing stats: " + errorThrown );
-				console.log( "Status: " + status );
-				console.dir( xhr );
-            });
-        },1000);
+        const urlParams = new URLSearchParams(window.location.search);
+        const myParam = urlParams.get('nolog');
+        if (myParam==null) {
+            // if nolog not set, log stats
+            setTimeout(function() {
+                $.ajax({
+                    url: 'php/log_statistics.php',
+                    data: {
+                        'pmid_count': pmid_count,
+                        'pmid_errors': pmid_errors,
+                        'lic_count': lic_count,
+                        'lic_errors': lic_errors,
+                        'board_count': board_count,
+                        'board_errors': board_errors,
+                    },
+                    dataType: 'text',
+                    method: 'post',
+                }).success(function(){
+                    console.log("Stats recorded");
+                }).error(function( xhr, status, errorThrown ) {
+                    console.log( "Error writing stats: " + errorThrown );
+                    console.log( "Status: " + status );
+                    console.dir( xhr );
+                });
+            },1000);
+        }
     }});
 });
 
