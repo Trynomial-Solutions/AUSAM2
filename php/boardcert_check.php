@@ -10,7 +10,7 @@ function err($code, $text) {
 	exit($code);
 }
 
-function board_check($status, int $origyear, int $expyear, $boardname=null) {
+function board_check($status, int $origyear, int $expyear=null, $boardname=null) {
 	// process board dates - return 0 if okay, 1 if hard fail, 2 if soft fail
 	$rVal=array("code" => 0, "error" => "");
 	if ($boardname=="Not Certified") {$rVal['code']=1; $rVal['error']="Not Certified"; return $rVal;}
@@ -18,7 +18,11 @@ function board_check($status, int $origyear, int $expyear, $boardname=null) {
 	switch ($status) {
 		case "R":
 			if ($expyear===0) {$rVal['code']=1; $rVal['error']="No expiration year listed";}
-			else if ($thisyear > $expyear) {$rVal['code']=1; $rVal['error']="Recert likely expired"; }
+			else if (($expyear!==null) && 
+                     ($thisyear > $expyear)) {
+                $rVal['code']=1; 
+                $rVal['error']="Recert likely expired"; 
+            }
 			else {$rVal['code']=2; $rVal['error']="Should this be 'M' or 'C' (participating in MOC/OCC)?";}
 			return $rVal;
 			break;
@@ -40,7 +44,12 @@ function board_check($status, int $origyear, int $expyear, $boardname=null) {
 			
 		case "M":
 		case "C":
-            if (($expyear!=0) && ($expyear < $thisyear)) {$rVal['code']=1; $rVal['error']="Certification expired";}
+            if (($expyear !==null) &&
+                ($expyear!=0) &&
+                ($expyear < $thisyear)) {
+                $rVal['code']=1; 
+                $rVal['error']="Certification expired";
+            }
 			return $rVal;
 			break;
 			
@@ -78,8 +87,7 @@ while ($nonphys_div->hasChildNodes()) {
 
 // check if this table has expiration year data - apparently some fellowships do not ask this (Geriatrics)
 $header_row=$xpath->query("//table[@id='tblRoster']/thead/tr[2]/th[text()='Expiration Year']");
-echo ($header_row->count());
-exit;
+$expiration_present = ($header_row->count()==1) ? true : false;
 
 $faculty=array();
 $i=-1;
@@ -98,7 +106,7 @@ foreach ($rows as $row) {
         $faculty[$i]['boards'][0]['boardname']=$cells->item(8)->nodeValue;
         $faculty[$i]['boards'][0]['origyear']=(int) $cells->item(10)->nodeValue;
         $faculty[$i]['boards'][0]['status']=$cells->item(12)->nodeValue;
-        $faculty[$i]['boards'][0]['expyear']=(int) $cells->item(14)->nodeValue;
+        if ($expiration_present) $faculty[$i]['boards'][0]['expyear']=(int) $cells->item(14)->nodeValue;
         $certcounter=0;
     }
     else {
@@ -108,10 +116,9 @@ foreach ($rows as $row) {
         $faculty[$i]['boards'][$certcounter]['boardname']=$cells->item(2)->nodeValue;
         $faculty[$i]['boards'][$certcounter]['origyear']=(int) $cells->item(4)->nodeValue;
         $faculty[$i]['boards'][$certcounter]['status']=$cells->item(6)->nodeValue;
-        $faculty[$i]['boards'][$certcounter]['expyear']=(int) $cells->item(8)->nodeValue;
+        if ($expiration_present) $faculty[$i]['boards'][$certcounter]['expyear']=(int) $cells->item(8)->nodeValue;
     }
 }   
-//print_r($faculty);
 
 // check validity of data reported
 foreach ($faculty as $fac) {
