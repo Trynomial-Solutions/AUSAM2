@@ -69,7 +69,7 @@ $rVal=array(
 );
 
 // DEBUG - LOAD HTML *********************
-$_POST['boardblock']=file_get_contents("../samples/WYSurg.html");
+// $_POST['boardblock']=file_get_contents("../samples/WYSurg.html");
 
 if ((!isset($_POST['boardblock'])) || (strlen($_POST['boardblock'])<10)) err(1, "Missing board text block");
 
@@ -119,6 +119,8 @@ foreach ($rows as $row) {
         if ($expiration_present) $faculty[$i]['boards'][$certcounter]['expyear']=(int) $cells->item(8)->nodeValue;
     }
 }   
+
+// print_r($faculty);
 
 // check validity of data reported
 foreach ($faculty as $fac) {
