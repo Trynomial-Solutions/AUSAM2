@@ -10,7 +10,7 @@ function err($code, $text) {
 	exit($code);
 }
 
-function board_check($status, int $origyear, int $expyear=null, $boardname=null) {
+function board_check($status, int $origyear, $expyear=null, $boardname=null) {
 	// process board dates - return 0 if okay, 1 if hard fail, 2 if soft fail
 	$rVal=array("code" => 0, "error" => "");
 	if ($boardname=="Not Certified") {$rVal['code']=1; $rVal['error']="Not Certified"; return $rVal;}
