@@ -95,8 +95,10 @@ function modal_dialog(title, htmltext, mail_send=false) {
 			console.log(xhr);
 		});
 	}
-	$('#modaldialog').html(htmltext);
-	$('#modaldialog').dialog({
+    var modal_rand="modaldialog_"+Math.floor(Math.random()*100);
+    $('body').append("<div id='"+modal_rand+"'></div>");
+	$('#'+modal_rand).html(htmltext);
+	$('#'+modal_rand).dialog({
 		modal: true,
 		title: title,
 		buttons: {
@@ -112,9 +114,9 @@ function process() {
 		modal_dialog("Missing Data", "Please copy-paste entire HTML code from ADS annual update. You can view <a href='"+DEMO_VIDEO_URL+"'>instructions</a> here.");
 		return false;
 	}
-    if ($('#adstext').val().search("<html>")==-1) {
-        modal_dialog("Need HTML Code", "You must paste the HTML code from the ADS page, as explained in the <a href='"+DEMO_VIDEO_URL+"'>updated instructions</a> here. <p>&nbsp;<p>To summarize, hold down <b>Ctrl</b> and press <b>U, A, C</b> on the 'Print Annual Update' page and paste that code here.", $('#adstext').val());
-        return false;
+    if ($('#adstext').val().search("<body")==-1) {
+        modal_dialog("Need HTML Code", "AUSAM2 works best with HTML code from the ADS page, as explained in the <a href='"+DEMO_VIDEO_URL+"'>instructions</a> here (Summary: Hold down <b>Ctrl</b> and press <b>U, A, C</b> on the 'Print Annual Update' page,  paste that code here).<p>&nbsp;<p><b>Results displayed will be inconsistent or incomplete.</b>", $('#adstext').val());
+//        return false;
     }
 	
 	reset_form();
