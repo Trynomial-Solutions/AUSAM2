@@ -18,7 +18,6 @@
 </head>
 
 <body>
-<div id="modaldialog"></div>
 <div id="page">
 <div id="header"><img src="img/beta.png" width="60" height="60" alt=""/>
 <p>AUSAM: ACGME Annual Update Scholarly Activity Monitor <a href="ausam2_instructions.pdf">(Instructions)</a></p>
