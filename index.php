@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
-<title>ACGME Annual Update Error Screener</title>
+<title>AUSAM: ACGME Annual Update Scholarly Activity Monitor v2</title>
 <!-- 
 <link href="../css/themes/HFEM.min.css" rel="stylesheet" type="text/css" />
 <link href="../css/themes/jquery.mobile.icons.min.css" rel="stylesheet" type="text/css" />
@@ -21,7 +21,7 @@
 <div id="modaldialog"></div>
 <div id="page">
 <div id="header"><img src="img/beta.png" width="60" height="60" alt=""/>
-<p>ACGME Annual Update Error Screener <a href="ausam2_instructions.pdf">(Instructions)</a></p>
+<p>AUSAM: ACGME Annual Update Scholarly Activity Monitor <a href="ausam2_instructions.pdf">(Instructions)</a></p>
 </div>
 <div id="content">
     <div id="form_div">
