@@ -65,6 +65,7 @@ $(document).ready(function() {
             },1000);
         }
     }});
+    $('#adstext').focus();
 });
 
 function reset_form() {
