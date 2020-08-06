@@ -10,3 +10,4 @@ composer.lock
 /php/connecti.inc.php
 /samples/WYSurg.html
 /samples/
+.vscode/sftp.json
