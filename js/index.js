@@ -3,6 +3,8 @@ const FAC_SA_START = "Faculty Scholarly Activity";
 const FAC_SA_END = "Faculty Development";
 const RES_SA_START = "Resident Scholarly Activity";
 const RES_SA_END = "List Of Residents On Leave";
+const FELLOW_SA_START = "Fellow Scholarly Activity";
+const FELLOW_SA_END = "Post Graduate PMIDs";
 const LIC_START = 'Current Licensure Data';
 const LIC_END = 'Academic Appointments';
 
@@ -132,10 +134,14 @@ function process() {
 	if (fac_end===-1) {fac_end=text.indexOf(FAC_SA_END.toUpperCase());}
 	var res_start=text.indexOf(RES_SA_START);
 	if (res_start===-1) {res_start=text.indexOf(RES_SA_START.toUpperCase());}
+	if (res_start===-1) {res_start=text.indexOf(FELLOW_SA_START);}
+	if (res_start===-1) {res_start=text.indexOf(FELLOW_SA_START.toUpperCase());}
 	var res_end=text.indexOf(RES_SA_END);
 	if (res_end===-1) {res_end=text.indexOf(RES_SA_END.toUpperCase());}
+	if (res_end===-1) {res_end=text.indexOf(FELLOW_SA_END);}
+	if (res_end===-1) {res_end=text.indexOf(FELLOW_SA_END.toUpperCase());}
 	var subtext=text.substring(fac_start, fac_end)+text.substring(res_start, res_end);
-   // console.log(fac_start, fac_end, res_start, res_end, subtext);
+   console.log(fac_start, fac_end, res_start, res_end, subtext);
 	if (subtext.length<10) {
 		// no scholarly activity block present
 		$('#pmid_table').append('<tr><td colspan="4">'+NOT_FOUND_HTML+'</td></tr>');
