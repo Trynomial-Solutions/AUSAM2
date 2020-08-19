@@ -1,6 +1,16 @@
 <!doctype html>
 <html>
 <head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-66251103-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-66251103-4');
+</script>
+
 <meta charset="utf-8">
 <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
 <title>AUSAM: ACGME Annual Update Scholarly Activity Monitor v2</title>
