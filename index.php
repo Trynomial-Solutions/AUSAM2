@@ -14,16 +14,10 @@
 <meta charset="utf-8">
 <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
 <title>AUSAM: ACGME Annual Update Scholarly Activity Monitor v2</title>
-<!-- 
-<link href="../css/themes/HFEM.min.css" rel="stylesheet" type="text/css" />
-<link href="../css/themes/jquery.mobile.icons.min.css" rel="stylesheet" type="text/css" />
-<link href="https://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" rel="stylesheet" type="text/css">
--->
 <link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
 <link href="css/index.css" rel="stylesheet" type="text/css">
 <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<!-- <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> -->
 <script src="js/index.js"></script>
 </head>
 
@@ -41,15 +35,17 @@
             <div id="progressbar"><div class="progress-label">Loading...</div></div>
             <p><label for="acyr">Applicable academic year:</label>
             <select name="acyr" id="acyr" data-mini="true" data-native-menu="false">
-<?php 
+              <?php 
 date_default_timezone_set("America/Detroit");
 for ($i=date('Y')-2; $i<date('Y')+1; $i++) {
-	echo "\t<option value='$i'";
+  echo "\t<option value='$i'";
 	if ($i==(date('Y')-1)) echo " selected";
 	echo ">$i-".($i+1)."</option>\r\n";
 }
 ?>
             </select>
+            &nbsp;
+            <input type="checkbox" id="pmid_only" value="1"> <label for="pmid_only">Check PMIDs Only</label>
               <p>&nbsp;</p>
             <input type="button" name="doit" id="doit" value="Check Data">
 		    <input type="reset" name="clear" id="clear" value="Reset">
