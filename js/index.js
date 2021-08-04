@@ -160,7 +160,7 @@ function process() {
 		var subtext=text.substring(fac_start, fac_end)+text.substring(res_start, res_end);
 		console.log(fac_start, fac_end, res_start, res_end, subtext);
 	}
-	if (subtext.length<10) {
+	if (subtext.length<8) {
 		// no scholarly activity block present
 		$('#pmid_table').append('<tr><td colspan="4">'+NOT_FOUND_HTML+'</td></tr>');
 		$('#pmid_table').show();
