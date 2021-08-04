@@ -145,15 +145,15 @@ function process() {
 	// process PMIDs
 	if (PMID_only) var subtext=text;
 	else {
-		const fac_start=text.indexOf(FAC_SA_START);
+		var fac_start=text.indexOf(FAC_SA_START);
 		if (fac_start===-1) {fac_start=text.indexOf(FAC_SA_START.toUpperCase());}
-		const fac_end=text.indexOf(FAC_SA_END, fac_start);
+		var fac_end=text.indexOf(FAC_SA_END, fac_start);
 		if (fac_end===-1) {fac_end=text.indexOf(FAC_SA_END.toUpperCase(), fac_start);}
-		const res_start=text.indexOf(RES_SA_START);
+		var res_start=text.indexOf(RES_SA_START);
 		if (res_start===-1) {res_start=text.indexOf(RES_SA_START.toUpperCase());}
 		if (res_start===-1) {res_start=text.indexOf(FELLOW_SA_START);}
 		if (res_start===-1) {res_start=text.indexOf(FELLOW_SA_START.toUpperCase());}
-		const res_end=text.indexOf(RES_SA_END, res_start);
+		var res_end=text.indexOf(RES_SA_END, res_start);
 		if (res_end===-1) {res_end=text.indexOf(RES_SA_END.toUpperCase(), res_start);}
 		if (res_end===-1) {res_end=text.indexOf(FELLOW_SA_END, res_start);}
 		if (res_end===-1) {res_end=text.indexOf(FELLOW_SA_END.toUpperCase(), res_start);}
