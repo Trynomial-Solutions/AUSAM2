@@ -158,7 +158,7 @@ function process() {
 		if (res_end===-1) {res_end=text.indexOf(FELLOW_SA_END, res_start);}
 		if (res_end===-1) {res_end=text.indexOf(FELLOW_SA_END.toUpperCase(), res_start);}
 		var subtext=text.substring(fac_start, fac_end)+text.substring(res_start, res_end);
-		console.log(fac_start, fac_end, res_start, res_end, subtext);
+		// console.log(fac_start, fac_end, res_start, res_end, subtext);
 	}
 	if (subtext.length<8) {
 		// no scholarly activity block present

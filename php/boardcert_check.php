@@ -1,6 +1,8 @@
 <?php
 // check for board certification validity
 date_default_timezone_set("America/Detroit");
+ini_set('display_errors', "On");
+error_reporting(E_ALL);
 
 function err($code, $text) {
 	global $rVal;
@@ -69,7 +71,7 @@ $rVal=array(
 );
 
 // DEBUG - LOAD HTML *********************
-// $_POST['boardblock']=file_get_contents("../samples/WYSurg.html");
+$_POST['boardblock']=file_get_contents("../samples/WYSurg.html");
 
 if ((!isset($_POST['boardblock'])) || (strlen($_POST['boardblock'])<10)) err(1, "Missing board text block");
 
@@ -94,6 +96,7 @@ $i=-1;
 $rows=$xpath->query("//table[@id='tblRoster']/tbody/tr");
 
 foreach ($rows as $row) {
+    print_r($row);
     // the first cell in this table has a rowspan that indicates how many board certifications are under it
     $firstcell_rowspan=$row->firstChild->attributes->getNamedItem('rowspan');
     $cells=$row->childNodes;
