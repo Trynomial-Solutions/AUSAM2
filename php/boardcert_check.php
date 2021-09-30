@@ -71,7 +71,7 @@ $rVal=array(
 );
 
 // DEBUG - LOAD HTML *********************
-$_POST['boardblock']=file_get_contents("../samples/WYSurg.html");
+// $_POST['boardblock']=file_get_contents("../samples/WYSurg.html");
 
 if ((!isset($_POST['boardblock'])) || (strlen($_POST['boardblock'])<10)) err(1, "Missing board text block");
 
@@ -93,12 +93,15 @@ $expiration_present = ($header_row->count()==1) ? true : false;
 
 $faculty=array();
 $i=-1;
-$rows=$xpath->query("//table[@id='tblRoster']/tbody/tr");
+$rows=$xpath->query("//table[@id='tblRoster']/tbody/*");
 
 foreach ($rows as $row) {
-    print_r($row);
+    if ($row->tagName !== 'tr') continue;
+    
     // the first cell in this table has a rowspan that indicates how many board certifications are under it
+    if ($row->firstChild->nodeType !== XML_ELEMENT_NODE) $row->removeChild($row->firstChild);  // sometimes the first child is a DOMtext element?
     $firstcell_rowspan=$row->firstChild->attributes->getNamedItem('rowspan');
+
     $cells=$row->childNodes;
     if ($firstcell_rowspan!==null) {
         // new faculty
