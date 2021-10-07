@@ -131,7 +131,7 @@ foreach ($rows as $row) {
 // check validity of data reported
 foreach ($faculty as $fac) {
     foreach ($fac['boards'] as $board) {
-        $check=board_check($board['status'], $board['origyear'], $board['expyear'], $board['boardname']);
+        $check=board_check($board['status'], $board['origyear'], $board['expyear'] ?? null, $board['boardname']);
         $r=array('name' => $fac['name'],
                  'specialty' => $board['specialty'],
                  'issues' => $check['code'],
