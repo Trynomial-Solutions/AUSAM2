@@ -96,7 +96,7 @@ for ($i=date('Y')-2; $i<date('Y')+1; $i++) {
 </div>
 </div>
 <footer id="footer">
-<p>Please use at your own risk. Coders, see <a href="https://github.com/Trynomial-Solutions/AUSAM2">GitHub Repo</a>. Contact <a href="mailto:ngoyal1@hfhs.org">Nikhil Goyal</a> with questions or feedback</p>
+<p>Please use at your own risk. Coders, see <a href="https://github.com/Trynomial-Solutions/AUSAM2">GitHub Repo</a>. Contact <a href="mailto:info@trynomial.solutions">Trynomial</a> with questions or feedback</p>
 </footer>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

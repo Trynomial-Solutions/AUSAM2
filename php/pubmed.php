@@ -8,7 +8,7 @@ Returns - json
 
 error{code, text}
 	0 if successful, text blank
-	1 if CURL error, text is actual error
+	1 if URL retrival error
 	2 preg_match failed
 	3 no PMIDs read
 	4 ay or pmids not sent or invalid
@@ -29,7 +29,7 @@ pmids = array with
 
 
 function chkdate($check, $ay) {
-	// convert text date to timestamp, check if it is within the specificed academic year
+	// convert text date to timestamp, check if it is within the specified academic year
 	$year=substr($check,0,4);
 	$month=substr($check,5,3);
 	$day=substr($check, 9);
@@ -94,14 +94,15 @@ if ($count===false) err (2, "preg_match_all error");
 if ($count===0) err (3, "No PMIDs found");
 $rVal['pmid_count']=$count;
 
-$url="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&retmode=json&version=2.0&id=".implode(',',$matches[0]);
-$ch = curl_init();
-curl_setopt($ch,CURLOPT_URL,$url);
-curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-curl_setopt($ch,CURLOPT_CONNECTTIMEOUT, 4);
-$json = curl_exec($ch);
-if($json===false) err(1, curl_error($ch));
-curl_close($ch);
+$get_params = [
+	'db' => "pubmed",
+	'retmode' => 'json',
+	'version' => "2.0",
+	'id' => implode(",",$matches[0]),
+];
+$url="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?".http_build_query($get_params);
+$json = file_get_contents($url);
+if($json===false) err(1, "Could not read $url");
 
 $result=json_decode($json, true);
 //echo $json;
@@ -158,17 +159,6 @@ foreach ($data['uids'] as $uid) {
 	$rVal['pmid_dated']++;
 }
 
-/*
-// write statistics
-require_once("../inc/web_connecti.inc.php");
-$sql="INSERT INTO ausam_stats (pmid_count, pmid_dated, pmid_oor, pmid_invalid) VALUES (?, ?, ?, ?)";
-$stmt=$web_dbi->prepare($sql);
-$stmt->bind_param("iiii", $rVal['pmid_count'], $rVal['pmid_dated'], $pmid_oor, $pmid_invalid);
-$stmt->execute();
-$stmt->close();
-*/
 header('Content-Type: application/json');
 echo json_encode($rVal);
-//print_r($rVal);
-exit(0);
 ?>

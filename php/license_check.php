@@ -47,5 +47,4 @@ $rVal["month"]=$expiration->format('F');
 
 header('Content-Type: application/json');
 echo json_encode($rVal);
-exit(0);
 ?>
