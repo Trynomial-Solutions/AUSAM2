@@ -16,8 +16,6 @@ var pmid_count=0;
 var pmid_errors=0;
 var lic_count=0;
 var lic_errors=0;
-var board_count=0;
-var board_errors=0;
 
 // PMID only?
 var PMID_only = false;
@@ -67,8 +65,6 @@ $(document).ready(function() {
                         'pmid_errors': pmid_errors,
                         'lic_count': lic_count,
                         'lic_errors': lic_errors,
-                        'board_count': board_count,
-                        'board_errors': board_errors,
                     },
                     dataType: 'text',
                     method: 'post',
@@ -93,9 +89,7 @@ function reset_form() {
 	$('#pmid_table').find("tr:gt(0)").remove();
 	$('#license').html('');
 	$('#license').removeClass();
-	$('#board_table').hide();
-	$('#board_table').find("tr:gt(0)").remove();
-    pmid_count=pmid_errors=lic_count=lic_errors=board_count=board_errors=0;
+    pmid_count=pmid_errors=lic_count=lic_errors=0;
 }
 
 function modal_dialog(title, htmltext, mail_send=false) {

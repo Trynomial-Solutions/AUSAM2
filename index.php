@@ -13,12 +13,9 @@
 
 <meta charset="utf-8">
 <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
-<title>AUSAM: ACGME Annual Update Scholarly Activity Monitor v2</title>
-<link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<title>AUSAM: ACGME Annual Update Scholarly Activity Monitor v2.1</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css" integrity="sha512-okE4owXD0kfXzgVXBzCDIiSSlpXn3tJbNodngsTnIYPJWjuYhtJ+qMoc0+WUwLHeOwns0wm57Ka903FqQKM1sA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link href="css/index.css" rel="stylesheet" type="text/css">
-<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<script src="js/index.js"></script>
 </head>
 
 <body>
@@ -80,7 +77,7 @@ for ($i=date('Y')-2; $i<date('Y')+1; $i++) {
         </tbody>
         </table>
         </div>
-        <div id="boards">
+    <!-- <div id="boards">
           <table border="0" cellpadding="0" cellspacing="0" id="board_table">
           <thead>
             <tr>
@@ -92,8 +89,8 @@ for ($i=date('Y')-2; $i<date('Y')+1; $i++) {
             <tbody>
             </tbody>
           </table>
-	<!-- <p>Suspect board certifications will be flagged <strong style="color:#F00">red</strong> or <strong style="color:#CBD000">yellow</strong>. All-white background indicates no errors were detected</p> -->
-        </div>
+	<p>Suspect board certifications will be flagged <strong style="color:#F00">red</strong> or <strong style="color:#CBD000">yellow</strong>. All-white background indicates no errors were detected</p>
+        </div> -->
        </div>
     </div>
 </div>
@@ -101,5 +98,8 @@ for ($i=date('Y')-2; $i<date('Y')+1; $i++) {
 <footer id="footer">
 <p>Please use at your own risk. Coders, see <a href="https://github.com/Trynomial-Solutions/AUSAM2">GitHub Repo</a>. Contact <a href="mailto:ngoyal1@hfhs.org">Nikhil Goyal</a> with questions or feedback</p>
 </footer>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="js/index.js"></script>
 </body>
 </html>
