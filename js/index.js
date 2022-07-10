@@ -8,8 +8,8 @@ const FELLOW_SA_END = "Post Graduate PMIDs";
 const LIC_START = 'Current Licensure Data';
 const LIC_END = 'Academic Appointments';
 
-// each time an action completes, progressbar advances by... (6 events adding up to 100%)
-const PROGRESSBAR_ADVANCE = 17;	
+// each time an action completes, progressbar advances by... (4 events adding up to 100%)
+const PROGRESSBAR_ADVANCE = 25;	
 
 // global vars to track stats
 var pmid_count=0;
@@ -51,9 +51,9 @@ $(document).ready(function() {
 			PMID_only = false;
 		}
 	});
-	$('#doit').on('click', function(){process();});
-	$('#clear').on('click', function(){reset_form();});
-    $('#progressbar').progressbar({complete: function(event, ui){
+	$('#doit').on('click', process);
+	$('#clear').on('click', reset_form);
+    $('#progressbar').progressbar({complete: function(){
         // completed; write stats to db
         const urlParams = new URLSearchParams(window.location.search);
         const myParam = urlParams.get('nolog');
@@ -230,25 +230,25 @@ function process() {
 	}
 	
 	// Board certification data - send all html
-    $.ajax({
-        url: "php/boardcert_check.php",
-        data: {boardblock: text},
-        dataType: "json",
-        method: "POST",
-        success: function(rval){
-            pb_val=$('#progressbar').progressbar("value");
-            $('#progressbar').progressbar("value", pb_val+PROGRESSBAR_ADVANCE);
-            console.log('Board Cert AJAX Returned:');
-            console.dir(rval);
-            board_processed(rval);
-        },
-        error: function( xhr, status, errorThrown ) {
-            modal_dialog( "BoardCert AJAX error", "Unexpected result. Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a>", xhr );
-            console.log( "Error: " + errorThrown );
-            console.log( "Status: " + status );
-            console.dir( xhr );
-        }
-    });
+    // $.ajax({
+    //     url: "php/boardcert_check.php",
+    //     data: {boardblock: text},
+    //     dataType: "json",
+    //     method: "POST",
+    //     success: function(rval){
+    //         pb_val=$('#progressbar').progressbar("value");
+    //         $('#progressbar').progressbar("value", pb_val+PROGRESSBAR_ADVANCE);
+    //         console.log('Board Cert AJAX Returned:');
+    //         console.dir(rval);
+    //         board_processed(rval);
+    //     },
+    //     error: function( xhr, status, errorThrown ) {
+    //         modal_dialog( "BoardCert AJAX error", "Unexpected result. Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a>", xhr );
+    //         console.log( "Error: " + errorThrown );
+    //         console.log( "Status: " + status );
+    //         console.dir( xhr );
+    //     }
+    // });
 }
 
 function pmid_processed(rval) {
@@ -316,40 +316,40 @@ function lic_processed(rval) {
     console.log("Licenses Processed: "+lic_count+", errors: "+lic_errors);
 }
 
-function board_processed(rval) {
-	// Board check returned from AJAX
-	"use strict";
+// function board_processed(rval) {
+// 	// Board check returned from AJAX
+// 	"use strict";
 
-	if (rval.error.code!==0) {
-		if (rval.error.code===2) {
-			$('#board_table').append("<tr><td colspan='3'>"+NOT_FOUND_HTML+"</td></tr>");
-			$('#board_table').show();
-			var val=$('#progressbar').progressbar("value");
-			$('#progressbar').progressbar("value", val+PROGRESSBAR_ADVANCE);
-		}
-		else {
-			modal_dialog("Error processing BoardCert", "Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a> with the entire text that you pasted in the box.<p>", rval.error.text);
-		}
-		return false;
-	}
+// 	if (rval.error.code!==0) {
+// 		if (rval.error.code===2) {
+// 			$('#board_table').append("<tr><td colspan='3'>"+NOT_FOUND_HTML+"</td></tr>");
+// 			$('#board_table').show();
+// 			var val=$('#progressbar').progressbar("value");
+// 			$('#progressbar').progressbar("value", val+PROGRESSBAR_ADVANCE);
+// 		}
+// 		else {
+// 			modal_dialog("Error processing BoardCert", "Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a> with the entire text that you pasted in the box.<p>", rval.error.text);
+// 		}
+// 		return false;
+// 	}
 	
-	$.each(rval.results, function(key, val) {
-        board_count++;
-		var rowid="staffid_"+key;
-		var toappend='<tr id="'+rowid+'"><td>'+val.name+'</td><td>'+val.specialty+'</td><td>';
-		if (val.issues!==0) { toappend+=val.descr; }
-		else {toappend+="OK";}
-		toappend+="</td></tr>";
-		$('#board_table').append(toappend);
-		if (val.issues===1) {
-            $('#'+rowid).children('td').addClass('flag_row');
-            board_errors++;
-        }
-		else if (val.issues===2) {$('#'+rowid).children('td').addClass('nomatch_row');}
-	});
+// 	$.each(rval.results, function(key, val) {
+//         board_count++;
+// 		var rowid="staffid_"+key;
+// 		var toappend='<tr id="'+rowid+'"><td>'+val.name+'</td><td>'+val.specialty+'</td><td>';
+// 		if (val.issues!==0) { toappend+=val.descr; }
+// 		else {toappend+="OK";}
+// 		toappend+="</td></tr>";
+// 		$('#board_table').append(toappend);
+// 		if (val.issues===1) {
+//             $('#'+rowid).children('td').addClass('flag_row');
+//             board_errors++;
+//         }
+// 		else if (val.issues===2) {$('#'+rowid).children('td').addClass('nomatch_row');}
+// 	});
 
-	$('#board_table').show();
-	var pb_val=$('#progressbar').progressbar("value");
-	$('#progressbar').progressbar("value", pb_val+PROGRESSBAR_ADVANCE);
-    console.log("Board Certs processed: "+board_count+", errors: "+board_errors);
-}
+// 	$('#board_table').show();
+// 	var pb_val=$('#progressbar').progressbar("value");
+// 	$('#progressbar').progressbar("value", pb_val+PROGRESSBAR_ADVANCE);
+//     console.log("Board Certs processed: "+board_count+", errors: "+board_errors);
+// }

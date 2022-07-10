@@ -3,15 +3,13 @@
 if (($ip=get_ip_address())!=false) $geolocate=get_geolocate($ip);
 
 require_once("connecti.inc.php");
-$sql="INSERT INTO ausam2_stats (pmid_count, pmid_errors, lic_count, lic_errors, board_count, board_errors, ip, zip, org) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$sql="INSERT INTO ausam2_stats (pmid_count, pmid_errors, lic_count, lic_errors, ip, zip, org) VALUES (?, ?, ?, ?, ?, ?, ?)";
 $stmt=$dbi->prepare($sql) or die ($dbi->error);
-$stmt->bind_param("iiiiiisss", 
+$stmt->bind_param("iiiisss", 
                   $_POST['pmid_count'],
                   $_POST['pmid_errors'],
                   $_POST['lic_count'],
                   $_POST['lic_errors'],
-                  $_POST['board_count'],
-                  $_POST['board_errors'],
                   $ip,
                   $geolocate['zip'],
                   $geolocate['org']

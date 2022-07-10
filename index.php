@@ -2,13 +2,13 @@
 <html>
 <head>
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-66251103-4"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JNPCQR0PF1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-66251103-4');
+  gtag('config', 'G-JNPCQR0PF1');
 </script>
 
 <meta charset="utf-8">
@@ -57,7 +57,7 @@ for ($i=date('Y')-2; $i<date('Y')+1; $i++) {
       <ul>
       <li><a href="#pmid">PMID Check<span id="pmid_icon"></span></a></li>
       <li><a href="#license">State License Check<span id="license_icon"></span></a></li>
-      <li><a href="#boards">Board Certification Check<span id="boards_icon"></span></a></li>
+      <!-- <li><a href="#boards">Board Certification Check<span id="boards_icon"></span></a></li> -->
       </ul>
         <div id="pmid">
   <table border="0" cellpadding="0" cellspacing="0" id="pmid_table">
@@ -92,14 +92,14 @@ for ($i=date('Y')-2; $i<date('Y')+1; $i++) {
             <tbody>
             </tbody>
           </table>
-	<p>Suspect board certifications will be flagged <strong style="color:#F00">red</strong> or <strong style="color:#CBD000">yellow</strong>. All-white background indicates no errors were detected</p>
+	<!-- <p>Suspect board certifications will be flagged <strong style="color:#F00">red</strong> or <strong style="color:#CBD000">yellow</strong>. All-white background indicates no errors were detected</p> -->
         </div>
        </div>
     </div>
 </div>
 </div>
 <footer id="footer">
-<p>Please use at your own risk. Coders, see <a href="https://github.com/MeWiz/AUSAM2">GitHub Repo</a>. Contact <a href="mailto:ngoyal1@hfhs.org">Nikhil Goyal</a> with questions or feedback</p>
+<p>Please use at your own risk. Coders, see <a href="https://github.com/Trynomial-Solutions/AUSAM2">GitHub Repo</a>. Contact <a href="mailto:ngoyal1@hfhs.org">Nikhil Goyal</a> with questions or feedback</p>
 </footer>
 </body>
 </html>
