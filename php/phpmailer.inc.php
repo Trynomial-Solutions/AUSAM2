@@ -13,7 +13,7 @@ try {
     $phpmailer->Host       = 'secure.emailsrvr.com';
     $phpmailer->SMTPAuth   = true;
     $phpmailer->Username   = 'noreply@mwconsulting.dev';
-    $phpmailer->Password   = 'c@V90P!EjLz@HbzjuO';
+    $phpmailer->Password   = 'a36L#Qo*yFn6oWpGzE';
     $phpmailer->SMTPSecure = 'tls';
     $phpmailer->Port       = 587;
     $phpmailer->addAddress("webmaster@meded.app");
