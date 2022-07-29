@@ -7,7 +7,7 @@ composer.lock
 /samples/RC.pdf
 /samples/HFEM2019.html
 /samples/HFEM2019_files/
-/php/connecti.inc.php
 /samples/WYSurg.html
 /samples/
 .vscode/sftp.json
+php/config.inc.php
