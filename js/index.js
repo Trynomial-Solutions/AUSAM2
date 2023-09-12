@@ -254,7 +254,7 @@ function pmid_processed(rval) {
 	}
 
 	if (rval.error.code!==0) {
-		modal_dialog("Error processing PubMed", "Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a> with the entire text that you pasted in the box.<p>", rval.error.text);
+		modal_dialog("Error processing PubMed", "Please contact <a href='mailto:ngoyal1@hfhs.org'>Nikhil Goyal</a> with the entire text that you pasted in the box.<p>", rval);
 		return false;
 	}
 
