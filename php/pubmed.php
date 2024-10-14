@@ -108,7 +108,7 @@ $get_params = [
 ];
 $url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?" . http_build_query($get_params);
 $json = file_get_contents($url);
-if ($json === false) err(1, "Could not read $url");
+if ($json === false) err(1, "Could not read $url" . PHP_EOL . PHP_EOL . "JSON received: " . print_r($json, true));
 
 $result = json_decode($json, true);
 //echo $json;
