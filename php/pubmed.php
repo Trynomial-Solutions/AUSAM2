@@ -109,12 +109,13 @@ $get_params = [
 $url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?" . http_build_query($get_params);
 ini_set('default_socket_timeout', 60);
 $json = file_get_contents($url);
-if ($json === false) {
-    $rVal['error']['json'] = print_r($json, true);
+$result = json_decode($json, true);
+if ($result == false || $result == null) {
+    $rVal['error']['received'] = print_r($json, true);
+    $rVal['error']['params'] = print_r($get_params, true);
     err(1, "Could not read $url");
 }
 
-$result = json_decode($json, true);
 //echo $json;
 $data = $result['result'];
 if ($_POST['debug'] == 1) $rVal['debug'] = $data;
