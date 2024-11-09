@@ -1,11 +1,12 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 $phpmailer = new PHPMailer(true);
-if (!isset($cfg)) require_once __DIR__."/config.inc.php";
+if (!isset($cfg)) require_once __DIR__ . "/config.inc.php";
 
 try {
     //Server settings
@@ -24,4 +25,3 @@ try {
 } catch (Exception $e) {
     throw new RuntimeException("phpmailer init Error: {$phpmailer->ErrorInfo}");
 }
-?>
