@@ -1,13 +1,7 @@
 _notes/
 vendor/
-composer.json
 composer.lock
 *.LCK
-/samples/TY.pdf
-/samples/RC.pdf
-/samples/HFEM2019.html
-/samples/HFEM2019_files/
-/samples/WYSurg.html
-/samples/
-.vscode/sftp.json
+samples/
+.vscode/
 php/config.inc.php
