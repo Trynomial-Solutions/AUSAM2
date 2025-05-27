@@ -51,33 +51,6 @@ $(document).ready(function() {
 	});
 	$('#doit').on('click', process);
 	$('#clear').on('click', reset_form);
-    $('#progressbar').progressbar({complete: function(){
-        // completed; write stats to db
-        const urlParams = new URLSearchParams(window.location.search);
-        const myParam = urlParams.get('nolog');
-        if (myParam==null) {
-            // if nolog not set, log stats
-            setTimeout(function() {
-                $.ajax({
-                    url: 'php/log_statistics.php',
-                    data: {
-                        'pmid_count': pmid_count,
-                        'pmid_errors': pmid_errors,
-                        'lic_count': lic_count,
-                        'lic_errors': lic_errors,
-                    },
-                    dataType: 'text',
-                    method: 'post',
-                }).success(function(){
-                    console.log("Stats recorded");
-                }).error(function( xhr, status, errorThrown ) {
-                    console.log( "Error writing stats: " + errorThrown );
-                    console.log( "Status: " + status );
-                    console.dir( xhr );
-                });
-            },1000);
-        }
-    }});
     $('#adstext').focus();
 });
 
