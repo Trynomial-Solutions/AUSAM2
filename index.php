@@ -15,6 +15,7 @@
             <p>AUSAM: ACGME Annual Update Scholarly Activity Monitor <a href="ausam2_instructions.pdf">(Instructions)</a></p>
         </div>
         <div id="content">
+            <p style="text-align: center; margin-top: 0.5em"><mark>Update June 2025:</mark> Starting with the 2025-2026 Annual Update, the ACGME <a href="https://acgmehelp.acgme.org/hc/en-us/categories/31772726439447-Annual-Update-2025-2026">removed PMID reporting requirements</a> for faculty. Therefore, this tool will only check PMIDs for residents and fellows. <a href="mailto:info@trynomial.solutions">Feedback</a> is welcome!</p>
             <div id="form_div">
                 <form id="adsform" name="adsform" method="post">
                     <p>
@@ -70,20 +71,6 @@
                             </tbody>
                         </table>
                     </div>
-                    <!-- <div id="boards">
-          <table border="0" cellpadding="0" cellspacing="0" id="board_table">
-          <thead>
-            <tr>
-              <th scope="col">Faculty</th>
-              <th scope="col">Specialty</th>
-              <th scope="col">Notes</th>
-            </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-	<p>Suspect board certifications will be flagged <strong style="color:#F00">red</strong> or <strong style="color:#CBD000">yellow</strong>. All-white background indicates no errors were detected</p>
-        </div> -->
                 </div>
             </div>
         </div>

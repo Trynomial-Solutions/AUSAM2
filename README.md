@@ -3,6 +3,9 @@
 v2 - incorporates scholarly activity tracker + board cert checker + PD state license checker
 
 ## Updates:
+**2025-06**
+* Remove faculty PMID screening, no longer required by ACGME
+
 **2019-08:**
 * Updated code to support new ADS
 * Now have to send HTML, not text
