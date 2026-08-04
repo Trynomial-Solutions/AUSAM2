@@ -1,6 +1,6 @@
 // these constants define boundaries of text in the ADS. For example resident scholarly activity is between the text listed in RES_SA_START and RES_SA_END
 const RES_SA_START = "Resident Scholarly Activity";
-const RES_SA_END = "List Of Residents On Leave";
+const RES_SA_END = "/body>";
 const FELLOW_SA_START = "Fellow Scholarly Activity";
 const FELLOW_SA_END = "Post Graduate PMIDs";
 const LIC_START = 'Current Licensure Data';
